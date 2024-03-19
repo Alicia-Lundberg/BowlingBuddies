@@ -7,10 +7,119 @@
     tools:context=".BowlingActivity">
 
     <Button
+        android:id="@+id/bowlingButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="532dp"
+        android:layout_marginEnd="30dp"
+        android:text="Press to throw"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/kagla1"
+        android:layout_width="150dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="131dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/kagla_2" />
+
+    <ImageView
+        android:id="@+id/kagla2"
+        android:layout_width="150dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/kagla_2" />
+
+    <ImageView
+        android:id="@+id/kagla3"
+        android:layout_width="150dp"
+        android:layout_height="250dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/kagla_2" />
+
+    <ImageView
+        android:id="@+id/kagla4"
+        android:layout_width="150dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="76dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/kagla_2" />
+
+    <ImageView
+        android:id="@+id/kagla5"
+        android:layout_width="150dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/kagla_2" />
+
+    <ImageView
+        android:id="@+id/kagla6"
+        android:layout_width="150dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="131dp"
+        android:layout_marginTop="105dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/kagla_2" />
+
+    <ImageButton
         android:id="@+id/returnButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Return"
-        tools:layout_editor_absoluteX="27dp"
-        tools:layout_editor_absoluteY="35dp" />
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_revert" />
+
+    <ImageView
+        android:id="@+id/blueBall"
+        android:layout_width="150dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="420dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/blueball_2" />
+
+    <Button
+        android:id="@+id/resetPins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="532dp"
+        android:text="Reset pins"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/bowlingball"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="480dp"
+        android:text="Throw ball"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/resetBall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="480dp"
+        android:text="Reset ball"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
