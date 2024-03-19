@@ -11,6 +11,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Return"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="27dp"
         tools:layout_editor_absoluteY="35dp" />
+
+    <TextView
+        android:id="@+id/accelerometerValuesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="353dp"
+        android:layout_marginEnd="83dp"
+        android:layout_marginBottom="354dp"
+        android:text="Accelerometer Values: (0.0, 0.0, 0.0)"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/gyroscopeValuesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="457dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="250dp"
+        android:text="Gyroscope Values: (0.0, 0.0, 0.0)"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
