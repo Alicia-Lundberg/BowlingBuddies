@@ -1,5 +1,7 @@
 package com.example.bowling;
 
+import static java.lang.Math.random;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import java.util.Random;
 
 public class BowlingActivity extends AppCompatActivity {
 
@@ -45,12 +49,12 @@ public class BowlingActivity extends AppCompatActivity {
                 @Override
                 public void onClick (View v){
 
-                    kaglaFallRight(kagla6);
-                    kaglaFallLeft(kagla5);
-                    kaglaFallRight(kagla4);
-                    kaglaFallLeft(kagla3);
-                    kaglaFallRight(kagla2);
-                    kaglaFallRight(kagla1);
+                    kaglaFall(kagla6);
+                    kaglaFall(kagla5);
+                    kaglaFall(kagla4);
+                    kaglaFall(kagla3);
+                    kaglaFall(kagla2);
+                    kaglaFall(kagla1);
 
                 MediaPlayer mediaPlayer = MediaPlayer.create(BowlingActivity.this, R.raw.strike);
                 mediaPlayer.start();
@@ -102,6 +106,22 @@ public class BowlingActivity extends AppCompatActivity {
         final float kaglarotation = kagla.getRotation() - 90f;
         float kaglaplacement = kagla.getHeight() * 0.2f;
 
+        kagla.animate()
+                .setDuration(300)
+                .rotation(kaglarotation)
+                .translationYBy(kaglaplacement)
+                .start();
+    }
+
+    private void kaglaFall(ImageView kagla) {
+        Random random = new Random();
+        final float kaglarotation;
+        if (random.nextBoolean()) {
+            kaglarotation = kagla.getRotation() + 90f;
+        } else {
+            kaglarotation = kagla.getRotation() - 90f;
+        }
+        float kaglaplacement = kagla.getHeight() * 0.2f;
         kagla.animate()
                 .setDuration(300)
                 .rotation(kaglarotation)
