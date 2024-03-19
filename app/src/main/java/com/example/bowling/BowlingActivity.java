@@ -60,8 +60,10 @@ public class BowlingActivity extends AppCompatActivity {
                         if(event.getAction()==MotionEvent.ACTION_UP){
                             return true;
                         }
-                        if(Math.abs(ty) > 5){
+                        if(Math.abs(ty) > 2){
                             Log.d("accelerometer",valuesText);
+                            //onThrow(tx);
+                            onScore(tx, ty, tz);
                         }
 
                         return false;
@@ -119,7 +121,7 @@ public class BowlingActivity extends AppCompatActivity {
 
 
     private void onScore(float tx, float ty, float tz){
-        if(ty < -3 && tz < -2 && Math.abs(tx) < 0.5){
+        if(ty < -2 && tz < -2 && Math.abs(tx) < 0.5){
             Log.d("Score", "Score");
         }
     }
