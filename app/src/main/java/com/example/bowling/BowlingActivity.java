@@ -36,6 +36,24 @@ public class BowlingActivity extends AppCompatActivity {
     private ImageView kagla6;
     private ImageView blueBall;
 
+    private int scoreCounter;
+
+    private boolean ThreeIsPositive = true;
+
+   private float zNow = 1;
+
+    private float oneZago = 1;
+
+    private float twoZago = 1;
+
+    private float threeZago = 1;
+    private float fourZago = 1;
+    private float fiveZago = 1;
+
+
+
+    //private boolean isForward = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -68,17 +86,33 @@ public class BowlingActivity extends AppCompatActivity {
                     //onThrow(tx);
                     //onScore(tx, ty, tz);
                 }
+                fiveZago = fourZago;
+                fourZago = threeZago;
+                threeZago = twoZago;
+                twoZago = oneZago;
+                oneZago = zNow;
+                zNow = tz;
+
+               if (fiveZago < 0) {
+                   scoreCounter = 0;
+               }
 
                 button2.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
                         if(event.getAction()==MotionEvent.ACTION_UP){
+                            scoreCounter=0;
+
+
+
                             return true;
                         }
-                        if(Math.abs(ty) > 2){
+                        if(Math.abs(ty) > 2 ){
                             Log.d("accelerometer",valuesText);
+                            Log.d("counter", Integer.toString(scoreCounter));
                             //onThrow(tx);
                             onScore(tx, ty, tz);
+
                         }
 
                         return false;
@@ -185,8 +219,24 @@ public class BowlingActivity extends AppCompatActivity {
 
     private void onScore(float tx, float ty, float tz) {
 
-        if (Math.abs(ty) > 2 && Math.abs(tz) > 2 && Math.abs(tx) < 0.5) {
+
+
+
+        if (ty < -2 && tz > 2 && Math.abs(tx) < 0.5) {
+             //Baklänges kast som blir positiv i slutet
             Log.d("Score", "Score");
+            scoreCounter ++;
+
+        }
+
+        if (scoreCounter > 7) {
+            kaglaFall(kagla1);
+            kaglaFall(kagla2);
+            kaglaFall(kagla3);
+            kaglaFall(kagla4);
+            kaglaFall(kagla5);
+            kaglaFall(kagla6);
+            scoreCounter = 0;
         }
     }
 
