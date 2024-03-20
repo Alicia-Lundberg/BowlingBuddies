@@ -55,13 +55,13 @@ public class BowlingActivity extends AppCompatActivity {
 
 
         accelerometer = new Accelerometer(this);
-        accelerometerValuesTextView = findViewById(R.id.accelerometerValuesTextView);
+
         accelerometer.setListener(new Accelerometer.Listener() {
+            @SuppressLint("ClickableViewAccessibility")
             @Override
             public void onTranslation(float tx, float ty, float tz) {
                 String valuesText = String.format(Locale.getDefault(),
                         "Accelerometer x: %.1f y: %.1f, z: %.1f", tx, ty,tz);
-                accelerometerValuesTextView.setText(valuesText);
 
                 if (Math.abs(ty) > 2) {
                     //Log.d("accelerometer",valuesText);
@@ -91,46 +91,15 @@ public class BowlingActivity extends AppCompatActivity {
 
 
         gyroscope = new Gyroscope(this);
-        gyroscopeValuesTextView = findViewById(R.id.gyroscopeValuesTextView);
         gyroscope.setListener(new Gyroscope.Listener() {
             @Override
             public void onRotation(float tx, float ty, float tz) {
                 String valuesText = String.format(Locale.getDefault(),
                         "Gyroscope x: %.1f y: %.1f, z: %.1f", tx, ty,tz);
-                gyroscopeValuesTextView.setText(valuesText);
 
             }
         });
 
-
-
-    }
-
-    @Override
-    protected  void onResume(){
-        super.onResume();
-
-        accelerometer.register();
-        gyroscope.register();
-
-    }
-
-
-    @Override
-    protected  void onPause(){
-        super.onPause();
-
-        accelerometer.unregister();
-        gyroscope.unregister();
-    }
-
-    private void onThrow(float tx){
-
-        if(Math.abs(tx) < 1 ){
-            Log.d("rakt", "rakt");
-        }else{
-            Log.d("snett", "snett");
-        }
 
 
         kagla6 = (ImageView) findViewById(R.id.kagla6);
@@ -141,19 +110,19 @@ public class BowlingActivity extends AppCompatActivity {
         kagla1 = (ImageView) findViewById(R.id.kagla1);
         Button bowlingButton = findViewById(R.id.bowlingButton);
         bowlingButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick (View v){
+            @Override
+            public void onClick (View v){
 
-                    kaglaFall(kagla6);
-                    kaglaFall(kagla5);
-                    kaglaFall(kagla4);
-                    kaglaFall(kagla3);
-                    kaglaFall(kagla2);
-                    kaglaFall(kagla1);
+                kaglaFall(kagla6);
+                kaglaFall(kagla5);
+                kaglaFall(kagla4);
+                kaglaFall(kagla3);
+                kaglaFall(kagla2);
+                kaglaFall(kagla1);
 
                 MediaPlayer mediaPlayer = MediaPlayer.create(BowlingActivity.this, R.raw.strike);
                 mediaPlayer.start();
-                }
+            }
         });
 
         Button resetPins = findViewById(R.id.resetPins);
@@ -184,7 +153,47 @@ public class BowlingActivity extends AppCompatActivity {
         });
 
 
+
     }
+
+    @Override
+    protected  void onResume(){
+        super.onResume();
+
+        accelerometer.register();
+        gyroscope.register();
+
+    }
+
+
+    @Override
+    protected  void onPause(){
+        super.onPause();
+
+        accelerometer.unregister();
+        gyroscope.unregister();
+    }
+
+    private void onThrow(float tx) {
+
+        if (Math.abs(tx) < 1) {
+            Log.d("rakt", "rakt");
+        } else {
+            Log.d("snett", "snett");
+        }
+    }
+
+    private void onScore(float tx, float ty, float tz) {
+
+        if (Math.abs(ty) > 2 && Math.abs(tz) > 2 && Math.abs(tx) < 0.5) {
+            Log.d("Score", "Score");
+        }
+    }
+
+
+
+
+
 
     private void kaglaFallRight(ImageView kagla) {
         final float kaglarotation = kagla.getRotation() + 90f;
