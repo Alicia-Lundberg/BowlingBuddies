@@ -75,13 +75,16 @@
 
     <ImageButton
         android:id="@+id/returnButton"
+        android:labelFor="@id/returnButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_revert" />
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="328dp"
+        android:layout_marginBottom="645dp"
+        android:text="Return"
+        app:srcCompat="@android:drawable/ic_menu_revert"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/blueBall"
@@ -120,6 +123,21 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="480dp"
         android:text="Reset ball"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="145dp"
+        android:layout_height="146dp"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="322dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="263dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
