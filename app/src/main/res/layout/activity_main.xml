@@ -9,13 +9,15 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
         android:layout_marginBottom="132dp"
         android:text="Play"
         android:backgroundTint="#EF6011"
         android:textColor="@color/white"
-        android:textSize="15dp"
+        android:background="@drawable/rounded_button"
+        android:textSize="35dp"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
