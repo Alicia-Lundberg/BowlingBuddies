@@ -250,15 +250,20 @@ public class BowlingActivity extends AppCompatActivity {
 
     private void resetBall(ImageView ball) {
         ball.setTranslationY(0f);
+        ball.setScaleX(1.0f);
+        ball.setScaleY(1.0f);
         ball.setVisibility(View.VISIBLE);
     }
 
-    private void throwBall(ImageView ball) {
-        float ballPlacement = -ball.getHeight() * 1.3f;
+    private void throwBall(final ImageView ball) {
+        final float ballPlacement = -ball.getHeight() * 0.8f;
+        final float scale = 0.5f;
 
         ball.animate()
                 .setDuration(700)
                 .translationYBy(ballPlacement)
+                .scaleX(scale)
+                .scaleY(scale)
                 .withEndAction(new Runnable() {
                     @Override
                     public void run() {
@@ -267,6 +272,6 @@ public class BowlingActivity extends AppCompatActivity {
                     }
                 })
                 .start();
-
     }
+
 }
