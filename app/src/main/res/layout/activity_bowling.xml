@@ -92,14 +92,14 @@
 
     <ImageView
         android:id="@+id/kryss1"
-        android:layout_width="29dp"
-        android:layout_height="30dp"
+        android:layout_width="38dp"
+        android:layout_height="29dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.845"
+        app:layout_constraintHorizontal_bias="0.841"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.104"
+        app:layout_constraintVertical_bias="0.105"
         app:srcCompat="@drawable/kryss" />
 
     <ImageButton
