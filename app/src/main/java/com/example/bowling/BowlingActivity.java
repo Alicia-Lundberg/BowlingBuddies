@@ -52,6 +52,8 @@ public class BowlingActivity extends AppCompatActivity {
 
 
 
+
+
     //private boolean isForward = true;
 
     @Override
@@ -80,12 +82,6 @@ public class BowlingActivity extends AppCompatActivity {
             public void onTranslation(float tx, float ty, float tz) {
                 String valuesText = String.format(Locale.getDefault(),
                         "Accelerometer x: %.1f y: %.1f, z: %.1f", tx, ty,tz);
-
-                if (Math.abs(ty) > 2) {
-                    //Log.d("accelerometer",valuesText);
-                    //onThrow(tx);
-                    //onScore(tx, ty, tz);
-                }
                 fiveZago = fourZago;
                 fourZago = threeZago;
                 threeZago = twoZago;
@@ -102,18 +98,19 @@ public class BowlingActivity extends AppCompatActivity {
                     public boolean onTouch(View v, MotionEvent event) {
                         if(event.getAction()==MotionEvent.ACTION_UP){
                             scoreCounter=0;
-
-
-
+                            throwBall(blueBall);
                             return true;
                         }
-                        if(Math.abs(ty) > 2 ){
-                            Log.d("accelerometer",valuesText);
-                            Log.d("counter", Integer.toString(scoreCounter));
-                            //onThrow(tx);
-                            onScore(tx, ty, tz);
-
+                        if(event.getAction()==MotionEvent.ACTION_DOWN){
+                            resetBall(blueBall);
+                            return true;
                         }
+                        Log.d("accelerometer",valuesText);
+                        Log.d("counter", Integer.toString(scoreCounter));
+                        onScore(tx, ty, tz);
+
+
+
 
                         return false;
                     }
@@ -219,17 +216,14 @@ public class BowlingActivity extends AppCompatActivity {
 
     private void onScore(float tx, float ty, float tz) {
 
-
-
-
-        if (ty < -2 && tz > 2 && Math.abs(tx) < 0.5) {
+        if (ty < -1 && tz > 1 && Math.abs(tx) < 0.5) {
              //Baklänges kast som blir positiv i slutet
             Log.d("Score", "Score");
             scoreCounter ++;
 
         }
 
-        if (scoreCounter > 7) {
+        if (scoreCounter > 3) {
             kaglaFall(kagla1);
             kaglaFall(kagla2);
             kaglaFall(kagla3);
@@ -306,6 +300,8 @@ public class BowlingActivity extends AppCompatActivity {
     }
 
     private void throwBall(final ImageView ball) {
+        MediaPlayer mediaPlayer = MediaPlayer.create(BowlingActivity.this, R.raw.rolling);
+        mediaPlayer.start();
         final float ballPlacement = -ball.getHeight() * 0.8f;
         final float scale = 0.5f;
 
