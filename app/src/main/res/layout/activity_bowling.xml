@@ -4,74 +4,103 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/newbowling"
     tools:context=".BowlingActivity">
 
     <Button
         android:id="@+id/bowlingButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="532dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginTop="684dp"
+        android:layout_marginEnd="28dp"
         android:text="Press to throw"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/kagla1"
-        android:layout_width="150dp"
-        android:layout_height="250dp"
-        android:layout_marginStart="131dp"
+        android:id="@+id/kagla6"
+        android:layout_width="75dp"
+        android:layout_height="175dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.586"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/kagla_2" />
-
-    <ImageView
-        android:id="@+id/kagla2"
-        android:layout_width="150dp"
-        android:layout_height="250dp"
-        android:layout_marginStart="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/kagla_2" />
-
-    <ImageView
-        android:id="@+id/kagla3"
-        android:layout_width="150dp"
-        android:layout_height="250dp"
-        android:layout_marginEnd="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/kagla_2" />
-
-    <ImageView
-        android:id="@+id/kagla4"
-        android:layout_width="150dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="76dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.371"
         app:srcCompat="@drawable/kagla_2" />
 
     <ImageView
         android:id="@+id/kagla5"
-        android:layout_width="150dp"
-        android:layout_height="250dp"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="60dp"
+        android:layout_width="75dp"
+        android:layout_height="175dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.371"
         app:srcCompat="@drawable/kagla_2" />
 
     <ImageView
-        android:id="@+id/kagla6"
-        android:layout_width="150dp"
-        android:layout_height="250dp"
-        android:layout_marginStart="131dp"
-        android:layout_marginTop="105dp"
+        android:id="@+id/kagla4"
+        android:layout_width="75dp"
+        android:layout_height="175dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.415"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.371"
         app:srcCompat="@drawable/kagla_2" />
+
+    <ImageView
+        android:id="@+id/kagla3"
+        android:layout_width="75dp"
+        android:layout_height="175dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.547"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.401"
+        app:srcCompat="@drawable/kagla_2" />
+
+    <ImageView
+        android:id="@+id/kagla2"
+        android:layout_width="75dp"
+        android:layout_height="175dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.401"
+        app:srcCompat="@drawable/kagla_2" />
+
+    <ImageView
+        android:id="@+id/kagla1"
+        android:layout_width="80dp"
+        android:layout_height="180dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.43"
+        app:srcCompat="@drawable/kagla_2" />
+
+
+    <ImageView
+        android:id="@+id/kryss1"
+        android:layout_width="29dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.845"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.104"
+        app:srcCompat="@drawable/kryss" />
 
     <ImageButton
         android:id="@+id/returnButton"
@@ -90,8 +119,8 @@
         android:id="@+id/blueBall"
         android:layout_width="150dp"
         android:layout_height="250dp"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="420dp"
+        android:layout_marginTop="450dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/blueball_2" />
@@ -100,8 +129,8 @@
         android:id="@+id/resetPins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="532dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="684dp"
         android:text="Reset pins"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -110,8 +139,8 @@
         android:id="@+id/bowlingball"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="250dp"
-        android:layout_marginTop="480dp"
+        android:layout_marginStart="228dp"
+        android:layout_marginTop="636dp"
         android:text="Throw ball"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -120,8 +149,8 @@
         android:id="@+id/resetBall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="480dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="636dp"
         android:text="Reset ball"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
