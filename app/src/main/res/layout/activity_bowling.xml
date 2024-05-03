@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/newbowling"
+    android:background="@drawable/newalley"
     tools:context=".BowlingActivity">
 
     <Button
         android:id="@+id/bowlingButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="684dp"
-        android:layout_marginEnd="28dp"
+        android:layout_marginTop="544dp"
+        android:layout_marginEnd="4dp"
         android:text="Press to throw"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
@@ -92,57 +92,129 @@
 
 
     <ImageView
-        android:id="@+id/kryss1"
-        android:layout_width="38dp"
-        android:layout_height="29dp"
+        android:id="@+id/one"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.841"
+        app:layout_constraintHorizontal_bias="0.857"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.105"
-        app:srcCompat="@drawable/kryss" />
+        app:layout_constraintVertical_bias="0.107"
+        app:srcCompat="@drawable/one" />
+
+    <ImageView
+        android:id="@+id/two"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="304dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.06"
+        app:srcCompat="@drawable/two" />
+
+    <ImageView
+        android:id="@+id/three"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.317"
+        app:layout_constraintStart_toEndOf="@+id/two"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.06"
+        app:srcCompat="@drawable/three" />
+
+    <ImageView
+        android:id="@+id/four"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/five"
+        app:layout_constraintHorizontal_bias="0.955"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.011"
+        app:srcCompat="@drawable/four" />
+
+    <ImageView
+        android:id="@+id/five"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.857"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.012"
+        app:srcCompat="@drawable/five" />
+
+    <ImageView
+        android:id="@+id/six"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toEndOf="@+id/five"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.011"
+        app:srcCompat="@drawable/six" />
 
     <ImageButton
         android:id="@+id/returnButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="328dp"
-        android:layout_marginBottom="645dp"
+        android:layout_width="44dp"
+        android:layout_height="49dp"
+        android:background="@android:color/transparent"
         android:labelFor="@id/returnButton"
-        android:text="Return"
-        app:srcCompat="@android:drawable/ic_menu_revert"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.002"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/newreturn"
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/blueBall"
+        android:id="@+id/orangeBall"
         android:layout_width="150dp"
         android:layout_height="250dp"
         android:layout_marginTop="450dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/blueball_2" />
+        app:srcCompat="@drawable/orangeball_2" />
 
     <Button
         android:id="@+id/resetPins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="684dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="512dp"
         android:text="Reset pins"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/resetGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="400dp"
+        android:text="Reset game"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
         android:id="@+id/bowlingball"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="228dp"
-        android:layout_marginTop="636dp"
+        android:layout_marginStart="284dp"
+        android:layout_marginTop="476dp"
         android:text="Throw ball"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
@@ -152,13 +224,12 @@
         android:id="@+id/resetBall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="636dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="456dp"
         android:text="Reset ball"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <Button
         android:id="@+id/button2"
@@ -174,4 +245,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
