@@ -226,7 +226,7 @@ public class BowlingActivity extends AppCompatActivity {
 
     private void checkScore() {
         if (strikeCounter > 3) {
-            throwBallStrike(blueBall);
+            throwBallStrike(orangeBall);
             Handler handler = new Handler();
 
             handler.postDelayed(new Runnable() {
@@ -245,7 +245,7 @@ public class BowlingActivity extends AppCompatActivity {
             strikeCounter = 0;
         }
         else if (leftCounter > rightCounter && leftCounter > 3) {
-            throwBallLeft(blueBall);
+            throwBallLeft(orangeBall);
             Handler handler = new Handler();
 
             handler.postDelayed(new Runnable() {
@@ -261,7 +261,7 @@ public class BowlingActivity extends AppCompatActivity {
             leftCounter = 0;
         }
         else if (rightCounter >= leftCounter && rightCounter > 3) {
-            throwBallRight(blueBall);
+            throwBallRight(orangeBall);
             Handler handler = new Handler();
 
             handler.postDelayed(new Runnable() {
@@ -277,9 +277,9 @@ public class BowlingActivity extends AppCompatActivity {
             rightCounter = 0;
         } else{
             if(leftCounter > rightCounter){
-                throwBallMissLeft(blueBall);
+                throwBallMissLeft(orangeBall);
             }else{
-                throwBallMissRight(blueBall);
+                throwBallMissRight(orangeBall);
             }
         }
     }
@@ -301,27 +301,7 @@ public class BowlingActivity extends AppCompatActivity {
 
 
 
-    private void kaglaFallRight(ImageView kagla) {
-        final float kaglarotation = kagla.getRotation() + 90f;
-        float kaglaplacement = kagla.getHeight() * 0.2f;
 
-        kagla.animate()
-                .setDuration(300)
-                .rotation(kaglarotation)
-                .translationYBy(kaglaplacement)
-                .start();
-    }
-
-    private void kaglaFallLeft(ImageView kagla) {
-        final float kaglarotation = kagla.getRotation() - 90f;
-        float kaglaplacement = kagla.getHeight() * 0.2f;
-
-        kagla.animate()
-                .setDuration(300)
-                .rotation(kaglarotation)
-                .translationYBy(kaglaplacement)
-                .start();
-    }
 
     private void kaglaFall(ImageView kagla) {
         Random random = new Random();
