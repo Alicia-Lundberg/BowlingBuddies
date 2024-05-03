@@ -262,9 +262,17 @@ public class BowlingActivity extends AppCompatActivity {
         Random random = new Random();
         final float kaglarotation;
         if (random.nextBoolean()) {
-            kaglarotation = kagla.getRotation() + 90f;
+            if (random.nextBoolean()) {
+                kaglarotation = kagla.getRotation() - 90f;
+            }else{
+                kaglarotation = kagla.getRotation() - 120f;
+            }
         } else {
-            kaglarotation = kagla.getRotation() - 90f;
+            if (random.nextBoolean()) {
+                kaglarotation = kagla.getRotation() + 90f;
+            }else{
+                kaglarotation = kagla.getRotation() + 120f;
+            }
         }
         float kaglaplacement = kagla.getHeight() * 0.2f;
         kagla.animate()
