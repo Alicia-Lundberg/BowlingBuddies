@@ -14,6 +14,7 @@
         android:layout_marginTop="684dp"
         android:layout_marginEnd="28dp"
         android:text="Press to throw"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -104,13 +105,13 @@
 
     <ImageButton
         android:id="@+id/returnButton"
-        android:labelFor="@id/returnButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="27dp"
         android:layout_marginTop="35dp"
         android:layout_marginEnd="328dp"
         android:layout_marginBottom="645dp"
+        android:labelFor="@id/returnButton"
         android:text="Return"
         app:srcCompat="@android:drawable/ic_menu_revert"
         tools:ignore="MissingConstraints" />
@@ -132,6 +133,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="684dp"
         android:text="Reset pins"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -142,6 +144,7 @@
         android:layout_marginStart="228dp"
         android:layout_marginTop="636dp"
         android:text="Throw ball"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -152,6 +155,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="636dp"
         android:text="Reset ball"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -160,11 +164,12 @@
         android:id="@+id/button2"
         android:layout_width="145dp"
         android:layout_height="146dp"
-        android:layout_marginStart="250dp"
-        android:layout_marginTop="322dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="263dp"
+        android:layout_marginStart="139dp"
+        android:layout_marginTop="497dp"
+        android:layout_marginEnd="127dp"
+        android:layout_marginBottom="88dp"
         android:text="Button"
+        android:alpha="0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

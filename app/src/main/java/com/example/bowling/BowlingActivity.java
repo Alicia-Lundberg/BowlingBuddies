@@ -36,24 +36,32 @@ public class BowlingActivity extends AppCompatActivity {
     private ImageView kagla6;
     private ImageView blueBall;
 
+    private int scoreCounter;
+
+    private boolean ThreeIsPositive = true;
+
+   private float zNow = 1;
+
+    private float oneZago = 1;
+
+    private float twoZago = 1;
+
+    private float threeZago = 1;
+    private float fourZago = 1;
+    private float fiveZago = 1;
+
+
+
+
+
+    //private boolean isForward = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bowling);
-
-
-        ImageButton returnButton = findViewById(R.id.returnButton);
-        returnButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(BowlingActivity.this, MainActivity.class));
-            }
-        });
-
         Button button2 = findViewById(R.id.button2);
-
-
         accelerometer = new Accelerometer(this);
 
         accelerometer.setListener(new Accelerometer.Listener() {
@@ -63,24 +71,38 @@ public class BowlingActivity extends AppCompatActivity {
                 String valuesText = String.format(Locale.getDefault(),
                         "Accelerometer x: %.1f y: %.1f, z: %.1f", tx, ty,tz);
 
-                if (Math.abs(ty) > 2) {
-                    //Log.d("accelerometer",valuesText);
-                    //onThrow(tx);
-                    //onScore(tx, ty, tz);
-                }
 
+               // Detta behövs för att checka att inbromsningen i baksvingen inte räknas som et rakt kast
+               fiveZago = fourZago;
+               fourZago = threeZago;
+               threeZago = twoZago;
+               twoZago = oneZago;
+               oneZago = zNow;
+               zNow = tz;
+               if (fiveZago < 0) {
+                   scoreCounter = 0;
+               }
                 button2.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
+                        //När man trycker ner knappen, "kasta" bollen, kan behövas öndra så att kastet sykas med att alla pins faller
                         if(event.getAction()==MotionEvent.ACTION_UP){
+                            scoreCounter=0;
+                            throwBall(blueBall);
                             return true;
                         }
-                        if(Math.abs(ty) > 2){
-                            Log.d("accelerometer",valuesText);
-                            //onThrow(tx);
-                            onScore(tx, ty, tz);
+
+                        //När man släpper knappen, reset både pins och boll
+                        if(event.getAction()==MotionEvent.ACTION_DOWN){
+                            resetBall(blueBall);
+                            resetPins();
+                            return true;
                         }
 
+                        //logga värdena och anropa onScore för att check om det är en score
+                        Log.d("accelerometer",valuesText);
+                        Log.d("counter", Integer.toString(scoreCounter));
+                        onScore(tx, ty, tz);
                         return false;
                     }
                 });
@@ -89,14 +111,11 @@ public class BowlingActivity extends AppCompatActivity {
         });
 
 
-
-        gyroscope = new Gyroscope(this);
-        gyroscope.setListener(new Gyroscope.Listener() {
+        ImageButton returnButton = findViewById(R.id.returnButton);
+        returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onRotation(float tx, float ty, float tz) {
-                String valuesText = String.format(Locale.getDefault(),
-                        "Gyroscope x: %.1f y: %.1f, z: %.1f", tx, ty,tz);
-
+            public void onClick(View v) {
+                startActivity(new Intent(BowlingActivity.this, MainActivity.class));
             }
         });
 
@@ -125,6 +144,11 @@ public class BowlingActivity extends AppCompatActivity {
             }
         });
 
+
+
+
+
+
         Button resetPins = findViewById(R.id.resetPins);
         resetPins.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,6 +156,10 @@ public class BowlingActivity extends AppCompatActivity {
                 resetPins();
             }
         });
+
+
+
+
 
         Button throwButton = findViewById(R.id.bowlingball);
         blueBall = (ImageView) findViewById(R.id.blueBall);
@@ -143,6 +171,11 @@ public class BowlingActivity extends AppCompatActivity {
                 throwBall(blueBall);
             }
         });
+
+
+
+
+
 
         Button resetBall = findViewById(R.id.resetBall);
         resetBall.setOnClickListener(new View.OnClickListener() {
@@ -159,34 +192,32 @@ public class BowlingActivity extends AppCompatActivity {
     @Override
     protected  void onResume(){
         super.onResume();
-
         accelerometer.register();
         gyroscope.register();
 
     }
-
-
     @Override
     protected  void onPause(){
         super.onPause();
-
         accelerometer.unregister();
         gyroscope.unregister();
     }
-
-    private void onThrow(float tx) {
-
-        if (Math.abs(tx) < 1) {
-            Log.d("rakt", "rakt");
-        } else {
-            Log.d("snett", "snett");
-        }
-    }
-
     private void onScore(float tx, float ty, float tz) {
-
-        if (Math.abs(ty) > 2 && Math.abs(tz) > 2 && Math.abs(tx) < 0.5) {
+        if (ty < -1 && tz > 1 && Math.abs(tx) < 0.5) {
             Log.d("Score", "Score");
+            scoreCounter ++;
+        }
+
+        if (scoreCounter > 3) {
+            kaglaFall(kagla1);
+            kaglaFall(kagla2);
+            kaglaFall(kagla3);
+            kaglaFall(kagla4);
+            kaglaFall(kagla5);
+            kaglaFall(kagla6);
+            scoreCounter = 0;
+            MediaPlayer mediaPlayer = MediaPlayer.create(BowlingActivity.this, R.raw.strike);
+            mediaPlayer.start();
         }
     }
 
@@ -256,6 +287,8 @@ public class BowlingActivity extends AppCompatActivity {
     }
 
     private void throwBall(final ImageView ball) {
+        MediaPlayer mediaPlayer = MediaPlayer.create(BowlingActivity.this, R.raw.rolling);
+        mediaPlayer.start();
         final float ballPlacement = -ball.getHeight() * 0.8f;
         final float scale = 0.5f;
 

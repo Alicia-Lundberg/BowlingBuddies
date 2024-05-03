@@ -25,6 +25,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/person1" />
+
     <ImageView
         android:id="@+id/person2"
         android:layout_width="250dp"
