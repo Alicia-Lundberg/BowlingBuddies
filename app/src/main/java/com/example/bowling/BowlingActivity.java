@@ -228,8 +228,6 @@ public class BowlingActivity extends AppCompatActivity {
                 }
             }, 800);
             strikeCounter = 0;
-            MediaPlayer mediaPlayer = MediaPlayer.create(BowlingActivity.this, R.raw.strike);
-            mediaPlayer.start();
         }
     }
 
