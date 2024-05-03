@@ -5,9 +5,12 @@ import static java.lang.Math.random;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Vibrator;
 import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -60,12 +63,34 @@ public class BowlingActivity extends AppCompatActivity {
 
 
     //private boolean isForward = true;
+    private ImageView blueBall;
+    private ImageView one;
+    private ImageView two;
+    private ImageView three;
+    private ImageView four;
+    private ImageView five;
+    private ImageView six;
+
+    Vibrator vibe;
+    private Vibrator vibrator;
+    private Handler handler = new Handler();
+    private boolean isVibrating = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bowling);
+        vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+        ImageButton returnButton = findViewById(R.id.returnButton);
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(BowlingActivity.this, MainActivity.class));
+            }
+        });
+
         Button button2 = findViewById(R.id.button2);
         accelerometer = new Accelerometer(this);
 
@@ -116,15 +141,6 @@ public class BowlingActivity extends AppCompatActivity {
         });
 
 
-        ImageButton returnButton = findViewById(R.id.returnButton);
-        returnButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(BowlingActivity.this, MainActivity.class));
-            }
-        });
-
-
 
         kagla6 = (ImageView) findViewById(R.id.kagla6);
         kagla5 = (ImageView) findViewById(R.id.kagla5);
@@ -132,6 +148,12 @@ public class BowlingActivity extends AppCompatActivity {
         kagla3 = (ImageView) findViewById(R.id.kagla3);
         kagla2 = (ImageView) findViewById(R.id.kagla2);
         kagla1 = (ImageView) findViewById(R.id.kagla1);
+        one = (ImageView) findViewById(R.id.one);
+        two = (ImageView) findViewById(R.id.two);
+        three = (ImageView) findViewById(R.id.three);
+        four = (ImageView) findViewById(R.id.four);
+        five = (ImageView) findViewById(R.id.five);
+        six = (ImageView) findViewById(R.id.six);
         Button bowlingButton = findViewById(R.id.bowlingButton);
         bowlingButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,7 +186,13 @@ public class BowlingActivity extends AppCompatActivity {
 
 
 
-
+        Button resetGame = findViewById(R.id.resetGame);
+        resetGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v){
+                resetGame();
+            }
+        });
 
         Button throwButton = findViewById(R.id.bowlingball);
         orangeBall = (ImageView) findViewById(R.id.orangeBall);
@@ -174,6 +202,7 @@ public class BowlingActivity extends AppCompatActivity {
                 MediaPlayer mediaPlayer = MediaPlayer.create(BowlingActivity.this, R.raw.rolling);
                 mediaPlayer.start();
                 throwBallStrike(orangeBall);
+                vibe.vibrate(80);
             }
         });
 
@@ -189,17 +218,14 @@ public class BowlingActivity extends AppCompatActivity {
                 resetBall(orangeBall);
             }
         });
-
-
-
     }
 
     @Override
     protected  void onResume(){
         super.onResume();
         accelerometer.register();
-
     }
+
     @Override
     protected  void onPause(){
         super.onPause();
@@ -280,6 +306,13 @@ public class BowlingActivity extends AppCompatActivity {
                 .rotation(kaglarotation)
                 .translationYBy(kaglaplacement)
                 .start();
+
+        one.setVisibility(View.INVISIBLE);
+        two.setVisibility(View.INVISIBLE);
+        //three.setVisibility(View.INVISIBLE);
+        four.setVisibility(View.INVISIBLE);
+        five.setVisibility(View.INVISIBLE);
+        six.setVisibility(View.INVISIBLE);
     }
 
     private void resetPins() {
@@ -295,6 +328,18 @@ public class BowlingActivity extends AppCompatActivity {
         kagla2.setTranslationY(0f);
         kagla1.setRotation(0f);
         kagla1.setTranslationY(0f);
+
+    }
+
+    private void resetGame(){
+        resetPins();
+        resetBall(orangeBall);
+        one.setVisibility(View.VISIBLE);
+        two.setVisibility(View.VISIBLE);
+        three.setVisibility(View.VISIBLE);
+        four.setVisibility(View.VISIBLE);
+        five.setVisibility(View.VISIBLE);
+        six.setVisibility(View.VISIBLE);
     }
 
     private void resetBall(ImageView ball) {
@@ -348,6 +393,7 @@ public class BowlingActivity extends AppCompatActivity {
     private void throwBallMissRight(final ImageView ball) {
         final float ballPlacement = -ball.getHeight() * 0.8f;
         final float scale = 0.5f;
+        vibe.vibrate(80);
         final float right = 180f;
 
         ball.animate()
@@ -406,6 +452,7 @@ public class BowlingActivity extends AppCompatActivity {
                     }
                 })
                 .start();
+
     }
 
 }
