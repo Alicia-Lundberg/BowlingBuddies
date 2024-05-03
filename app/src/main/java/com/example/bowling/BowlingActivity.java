@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -210,13 +211,20 @@ public class BowlingActivity extends AppCompatActivity {
             strikeCounter ++;
         }
 
-        if (strikeCounter > 3) {
-            kaglaFall(kagla1);
-            kaglaFall(kagla2);
-            kaglaFall(kagla3);
-            kaglaFall(kagla4);
-            kaglaFall(kagla5);
-            kaglaFall(kagla6);
+        if (strikeCounter > 0.25) {
+            Handler handler = new Handler();
+
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    kaglaFall(kagla1);
+                    kaglaFall(kagla2);
+                    kaglaFall(kagla3);
+                    kaglaFall(kagla4);
+                    kaglaFall(kagla5);
+                    kaglaFall(kagla6);
+                }
+            }, 800);
             strikeCounter = 0;
             MediaPlayer mediaPlayer = MediaPlayer.create(BowlingActivity.this, R.raw.strike);
             mediaPlayer.start();
