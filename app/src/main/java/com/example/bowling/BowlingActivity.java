@@ -36,7 +36,11 @@ public class BowlingActivity extends AppCompatActivity {
     private ImageView kagla6;
     private ImageView blueBall;
 
-    private int scoreCounter;
+    private int strikeCounter;
+
+    private int LeftstrikeCounter;
+
+    private int RightstrikeCounter;
 
     private boolean ThreeIsPositive = true;
 
@@ -80,14 +84,14 @@ public class BowlingActivity extends AppCompatActivity {
                oneZago = zNow;
                zNow = tz;
                if (fiveZago < 0) {
-                   scoreCounter = 0;
+                   strikeCounter = 0;
                }
                 button2.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
                         //När man trycker ner knappen, "kasta" bollen, kan behövas öndra så att kastet sykas med att alla pins faller
                         if(event.getAction()==MotionEvent.ACTION_UP){
-                            scoreCounter=0;
+                            strikeCounter=0;
                             throwBall(blueBall);
                             return true;
                         }
@@ -101,7 +105,7 @@ public class BowlingActivity extends AppCompatActivity {
 
                         //logga värdena och anropa onScore för att check om det är en score
                         Log.d("accelerometer",valuesText);
-                        Log.d("counter", Integer.toString(scoreCounter));
+                        Log.d("counter", Integer.toString(strikeCounter));
                         onScore(tx, ty, tz);
                         return false;
                     }
@@ -193,29 +197,27 @@ public class BowlingActivity extends AppCompatActivity {
     protected  void onResume(){
         super.onResume();
         accelerometer.register();
-        gyroscope.register();
 
     }
     @Override
     protected  void onPause(){
         super.onPause();
         accelerometer.unregister();
-        gyroscope.unregister();
     }
     private void onScore(float tx, float ty, float tz) {
         if (ty < -1 && tz > 1 && Math.abs(tx) < 0.5) {
             Log.d("Score", "Score");
-            scoreCounter ++;
+            strikeCounter ++;
         }
 
-        if (scoreCounter > 3) {
+        if (strikeCounter > 3) {
             kaglaFall(kagla1);
             kaglaFall(kagla2);
             kaglaFall(kagla3);
             kaglaFall(kagla4);
             kaglaFall(kagla5);
             kaglaFall(kagla6);
-            scoreCounter = 0;
+            strikeCounter = 0;
             MediaPlayer mediaPlayer = MediaPlayer.create(BowlingActivity.this, R.raw.strike);
             mediaPlayer.start();
         }
