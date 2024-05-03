@@ -92,7 +92,7 @@ public class BowlingActivity extends AppCompatActivity {
                         //När man trycker ner knappen, "kasta" bollen, kan behövas öndra så att kastet sykas med att alla pins faller
                         if(event.getAction()==MotionEvent.ACTION_UP){
                             strikeCounter=0;
-                            throwBall(blueBall);
+                            throwBallStrike(blueBall);
                             return true;
                         }
 
@@ -172,7 +172,7 @@ public class BowlingActivity extends AppCompatActivity {
             public void onClick (View v){
                 MediaPlayer mediaPlayer = MediaPlayer.create(BowlingActivity.this, R.raw.rolling);
                 mediaPlayer.start();
-                throwBall(blueBall);
+                throwBallStrike(blueBall);
             }
         });
 
@@ -283,19 +283,102 @@ public class BowlingActivity extends AppCompatActivity {
 
     private void resetBall(ImageView ball) {
         ball.setTranslationY(0f);
+        ball.setTranslationX(0f);
         ball.setScaleX(1.0f);
         ball.setScaleY(1.0f);
         ball.setVisibility(View.VISIBLE);
     }
 
-    private void throwBall(final ImageView ball) {
-        MediaPlayer mediaPlayer = MediaPlayer.create(BowlingActivity.this, R.raw.rolling);
-        mediaPlayer.start();
+    private void throwBallStrike(final ImageView ball) {
         final float ballPlacement = -ball.getHeight() * 0.8f;
         final float scale = 0.5f;
 
         ball.animate()
                 .setDuration(700)
+                .translationYBy(ballPlacement)
+                .scaleX(scale)
+                .scaleY(scale)
+                .withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Hide the ImageView when animation ends
+                        ball.setVisibility(View.GONE);
+                    }
+                })
+                .start();
+    }
+
+    private void throwBallMissLeft(final ImageView ball) {
+        final float ballPlacement = -ball.getHeight() * 0.8f;
+        final float scale = 0.5f;
+        final float left = -180f;
+
+        ball.animate()
+                .setDuration(700)
+                .translationXBy(left)
+                .translationYBy(ballPlacement)
+                .scaleX(scale)
+                .scaleY(scale)
+                .withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Hide the ImageView when animation ends
+                        ball.setVisibility(View.GONE);
+                    }
+                })
+                .start();
+    }
+
+    private void throwBallMissRight(final ImageView ball) {
+        final float ballPlacement = -ball.getHeight() * 0.8f;
+        final float scale = 0.5f;
+        final float right = 180f;
+
+        ball.animate()
+                .setDuration(700)
+                .translationXBy(right)
+                .translationYBy(ballPlacement)
+                .scaleX(scale)
+                .scaleY(scale)
+                .withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Hide the ImageView when animation ends
+                        ball.setVisibility(View.GONE);
+                    }
+                })
+                .start();
+    }
+
+    private void throwBallLeft(final ImageView ball) {
+        final float ballPlacement = -ball.getHeight() * 0.8f;
+        final float scale = 0.5f;
+        final float left = -90f;
+
+        ball.animate()
+                .setDuration(700)
+                .translationXBy(left)
+                .translationYBy(ballPlacement)
+                .scaleX(scale)
+                .scaleY(scale)
+                .withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Hide the ImageView when animation ends
+                        ball.setVisibility(View.GONE);
+                    }
+                })
+                .start();
+    }
+
+    private void throwBallRight(final ImageView ball) {
+        final float ballPlacement = -ball.getHeight() * 0.8f;
+        final float scale = 0.5f;
+        final float right = 90f;
+
+        ball.animate()
+                .setDuration(700)
+                .translationXBy(right)
                 .translationYBy(ballPlacement)
                 .scaleX(scale)
                 .scaleY(scale)
