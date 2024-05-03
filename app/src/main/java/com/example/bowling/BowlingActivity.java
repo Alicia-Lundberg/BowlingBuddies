@@ -211,7 +211,7 @@ public class BowlingActivity extends AppCompatActivity {
             strikeCounter ++;
         }
 
-        if (strikeCounter > 0.25) {
+        if (strikeCounter > 3) {
             Handler handler = new Handler();
 
             handler.postDelayed(new Runnable() {
@@ -223,6 +223,8 @@ public class BowlingActivity extends AppCompatActivity {
                     kaglaFall(kagla4);
                     kaglaFall(kagla5);
                     kaglaFall(kagla6);
+                    MediaPlayer mediaPlayer = MediaPlayer.create(BowlingActivity.this, R.raw.strike);
+                    mediaPlayer.start();
                 }
             }, 800);
             strikeCounter = 0;
