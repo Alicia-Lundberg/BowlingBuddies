@@ -117,14 +117,14 @@
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/blueBall"
+        android:id="@+id/orangeBall"
         android:layout_width="150dp"
         android:layout_height="250dp"
         android:layout_marginTop="450dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/blueball_2" />
+        app:srcCompat="@drawable/orangeball_2" />
 
     <Button
         android:id="@+id/resetPins"

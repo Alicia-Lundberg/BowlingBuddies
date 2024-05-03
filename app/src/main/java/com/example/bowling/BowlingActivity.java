@@ -35,7 +35,7 @@ public class BowlingActivity extends AppCompatActivity {
     private ImageView kagla4;
     private ImageView kagla5;
     private ImageView kagla6;
-    private ImageView blueBall;
+    private ImageView orangeBall;
 
     private int strikeCounter;
 
@@ -93,13 +93,13 @@ public class BowlingActivity extends AppCompatActivity {
                         //När man trycker ner knappen, "kasta" bollen, kan behövas öndra så att kastet sykas med att alla pins faller
                         if(event.getAction()==MotionEvent.ACTION_UP){
                             strikeCounter=0;
-                            throwBallStrike(blueBall);
+                            throwBallStrike(orangeBall);
                             return true;
                         }
 
                         //När man släpper knappen, reset både pins och boll
                         if(event.getAction()==MotionEvent.ACTION_DOWN){
-                            resetBall(blueBall);
+                            resetBall(orangeBall);
                             resetPins();
                             return true;
                         }
@@ -167,13 +167,13 @@ public class BowlingActivity extends AppCompatActivity {
 
 
         Button throwButton = findViewById(R.id.bowlingball);
-        blueBall = (ImageView) findViewById(R.id.blueBall);
+        orangeBall = (ImageView) findViewById(R.id.orangeBall);
         throwButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v){
                 MediaPlayer mediaPlayer = MediaPlayer.create(BowlingActivity.this, R.raw.rolling);
                 mediaPlayer.start();
-                throwBallStrike(blueBall);
+                throwBallStrike(orangeBall);
             }
         });
 
@@ -186,7 +186,7 @@ public class BowlingActivity extends AppCompatActivity {
         resetBall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v){
-                resetBall(blueBall);
+                resetBall(orangeBall);
             }
         });
 
