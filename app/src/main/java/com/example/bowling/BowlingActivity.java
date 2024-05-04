@@ -1,26 +1,23 @@
 package com.example.bowling;
 
 import static java.lang.Math.random;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.PorterDuff;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
-import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.media.MediaPlayer;
-import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.Locale;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -42,6 +39,7 @@ public class BowlingActivity extends AppCompatActivity {
     private ImageView kagla5;
     private ImageView kagla6;
     private ImageView orangeBall;
+    private ImageView strikePopup;
 
     private int strikeCounter;
 
@@ -82,6 +80,7 @@ public class BowlingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bowling);
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
+
         mediaPlayer = MediaPlayer.create(this, R.raw.music);
         mediaPlayer.setLooping(true); // Gör så musiken spelar på loop i bakgrunden
         mediaPlayer.start();
@@ -89,13 +88,26 @@ public class BowlingActivity extends AppCompatActivity {
         ImageButton returnButton = findViewById(R.id.returnButton);
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { //stänger av musiken när man går till hemskärm
                 if (mediaPlayer != null && mediaPlayer.isPlaying()) {
                     mediaPlayer.stop();
                     mediaPlayer.release();
                     mediaPlayer = null;
                 }
                 startActivity(new Intent(BowlingActivity.this, MainActivity.class));
+            }
+        });
+
+        ImageButton leaderboard = findViewById(R.id.leaderboard);
+        leaderboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { //stänger av musiken när man går till hemskärm
+                if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+                    mediaPlayer.stop();
+                    mediaPlayer.release();
+                    mediaPlayer = null;
+                }
+                startActivity(new Intent(BowlingActivity.this, LeaderboardActivity.class));
             }
         });
 
@@ -193,6 +205,35 @@ public class BowlingActivity extends AppCompatActivity {
             @Override
             public void onClick (View v){
                 resetPins();
+            }
+        });
+
+        strikePopup = (ImageView) findViewById(R.id.strikepopup);
+        Button testStrikeAnimation = findViewById(R.id.testStrikeAnimation);
+        testStrikeAnimation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v){
+                strikePopup.setScaleX(0.1f);
+                strikePopup.setScaleY(0.1f);
+                strikePopup.setVisibility(View.VISIBLE);
+
+                strikePopup.animate()
+                        .setDuration(700)
+                        .scaleX(1.0f)
+                        .scaleY(1.0f)
+                        .withEndAction(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Keep the ImageView visible for two seconds before hiding it
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        strikePopup.setVisibility(View.GONE);
+                                    }
+                                }, 2000);
+                            }
+                        })
+                        .start();
             }
         });
 
@@ -334,12 +375,15 @@ public class BowlingActivity extends AppCompatActivity {
                 .translationYBy(kaglaplacement)
                 .start();
 
-        one.setVisibility(View.INVISIBLE);
-        two.setVisibility(View.INVISIBLE);
-        //three.setVisibility(View.INVISIBLE);
-        four.setVisibility(View.INVISIBLE);
-        five.setVisibility(View.INVISIBLE);
-        six.setVisibility(View.INVISIBLE);
+        float saturationFactor = 0.5f; // Adjust as needed (0.0f for fully desaturated, 1.0f for original saturation)
+
+
+        one.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+        two.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+        three.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+        four.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+        five.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+        six.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
     }
 
     private void resetPins() {
@@ -361,12 +405,12 @@ public class BowlingActivity extends AppCompatActivity {
     private void resetGame(){
         resetPins();
         resetBall(orangeBall);
-        one.setVisibility(View.VISIBLE);
-        two.setVisibility(View.VISIBLE);
-        three.setVisibility(View.VISIBLE);
-        four.setVisibility(View.VISIBLE);
-        five.setVisibility(View.VISIBLE);
-        six.setVisibility(View.VISIBLE);
+        one.clearColorFilter();
+        two.clearColorFilter();
+        three.clearColorFilter();
+        four.clearColorFilter();
+        five.clearColorFilter();
+        six.clearColorFilter();
     }
 
     private void resetBall(ImageView ball) {
