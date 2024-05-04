@@ -17,6 +17,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.media.MediaPlayer;
+import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Locale;
 import android.widget.ImageButton;
@@ -58,11 +61,6 @@ public class BowlingActivity extends AppCompatActivity {
     private float fourZago = 1;
     private float fiveZago = 1;
 
-
-
-
-
-    //private boolean isForward = true;
     private ImageView blueBall;
     private ImageView one;
     private ImageView two;
@@ -75,6 +73,7 @@ public class BowlingActivity extends AppCompatActivity {
     private Vibrator vibrator;
     private Handler handler = new Handler();
     private boolean isVibrating = false;
+    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,10 +82,19 @@ public class BowlingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bowling);
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
+        mediaPlayer = MediaPlayer.create(this, R.raw.music);
+        mediaPlayer.setLooping(true); // Gör så musiken spelar på loop i bakgrunden
+        mediaPlayer.start();
+
         ImageButton returnButton = findViewById(R.id.returnButton);
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+                    mediaPlayer.stop();
+                    mediaPlayer.release();
+                    mediaPlayer = null;
+                }
                 startActivity(new Intent(BowlingActivity.this, MainActivity.class));
             }
         });
@@ -219,6 +227,9 @@ public class BowlingActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
 
     @Override
     protected  void onResume(){
