@@ -45,9 +45,9 @@ public class BowlingActivity extends AppCompatActivity {
 
     private int strikeCounter;
 
-    private int LeftstrikeCounter;
+    private int leftCounter;
 
-    private int RightstrikeCounter;
+    private int rightCounter;
 
     private boolean ThreeIsPositive = true;
 
@@ -119,14 +119,18 @@ public class BowlingActivity extends AppCompatActivity {
                zNow = tz;
                if (fiveZago < 0) {
                    strikeCounter = 0;
+                   rightCounter = 0;
+                   leftCounter = 0;
                }
                 button2.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
                         //När man trycker ner knappen, "kasta" bollen, kan behövas öndra så att kastet sykas med att alla pins faller
                         if(event.getAction()==MotionEvent.ACTION_UP){
+                            checkScore();
                             strikeCounter=0;
-                            throwBallStrike(orangeBall);
+                            leftCounter=0;
+                            rightCounter=0;
                             return true;
                         }
 
@@ -228,27 +232,9 @@ public class BowlingActivity extends AppCompatActivity {
         });
     }
 
-
-
-
-    @Override
-    protected  void onResume(){
-        super.onResume();
-        accelerometer.register();
-    }
-
-    @Override
-    protected  void onPause(){
-        super.onPause();
-        accelerometer.unregister();
-    }
-    private void onScore(float tx, float ty, float tz) {
-        if (ty < -1 && tz > 1 && Math.abs(tx) < 0.5) {
-            Log.d("Score", "Score");
-            strikeCounter ++;
-        }
-
+    private void checkScore() {
         if (strikeCounter > 3) {
+            throwBallStrike(orangeBall);
             Handler handler = new Handler();
 
             handler.postDelayed(new Runnable() {
@@ -263,37 +249,67 @@ public class BowlingActivity extends AppCompatActivity {
                     MediaPlayer mediaPlayer = MediaPlayer.create(BowlingActivity.this, R.raw.strike);
                     mediaPlayer.start();
                 }
-            }, 800);
+            }, 600);
             strikeCounter = 0;
         }
+        else if (leftCounter > rightCounter && leftCounter > 3) {
+            throwBallLeft(orangeBall);
+            Handler handler = new Handler();
+
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    kaglaFall(kagla2);
+                    kaglaFall(kagla4);
+                    kaglaFall(kagla6);
+                    MediaPlayer mediaPlayer = MediaPlayer.create(BowlingActivity.this, R.raw.strike);
+                    mediaPlayer.start();
+                }
+            }, 600);
+            leftCounter = 0;
+        }
+        else if (rightCounter >= leftCounter && rightCounter > 3) {
+            throwBallRight(orangeBall);
+            Handler handler = new Handler();
+
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    kaglaFall(kagla1);
+                    kaglaFall(kagla3);
+                    kaglaFall(kagla6);
+                    MediaPlayer mediaPlayer = MediaPlayer.create(BowlingActivity.this, R.raw.strike);
+                    mediaPlayer.start();
+                }
+            }, 600);
+            rightCounter = 0;
+        } else{
+            if(leftCounter > rightCounter){
+                throwBallMissLeft(orangeBall);
+            }else{
+                throwBallMissRight(orangeBall);
+            }
+        }
+    }
+    private void onScore(float tx, float ty, float tz) {
+        if(ty < -1 && tz > 1){
+            if (Math.abs(tx) < 0.5) {
+                strikeCounter ++; //strike
+            }
+            if ( tx > -1 && tx < 0) {
+                leftCounter ++; //lite vänster?
+            }
+            if (tx < 1 && tx > 0) {
+                rightCounter ++; // lite höger?
+            }
+        }
+
+
     }
 
 
 
 
-
-
-    private void kaglaFallRight(ImageView kagla) {
-        final float kaglarotation = kagla.getRotation() + 90f;
-        float kaglaplacement = kagla.getHeight() * 0.2f;
-
-        kagla.animate()
-                .setDuration(300)
-                .rotation(kaglarotation)
-                .translationYBy(kaglaplacement)
-                .start();
-    }
-
-    private void kaglaFallLeft(ImageView kagla) {
-        final float kaglarotation = kagla.getRotation() - 90f;
-        float kaglaplacement = kagla.getHeight() * 0.2f;
-
-        kagla.animate()
-                .setDuration(300)
-                .rotation(kaglarotation)
-                .translationYBy(kaglaplacement)
-                .start();
-    }
 
     private void kaglaFall(ImageView kagla) {
         Random random = new Random();
@@ -463,7 +479,18 @@ public class BowlingActivity extends AppCompatActivity {
                     }
                 })
                 .start();
+    }
 
+    @Override
+    protected  void onResume(){
+        super.onResume();
+        accelerometer.register();
+
+    }
+    @Override
+    protected  void onPause(){
+        super.onPause();
+        accelerometer.unregister();
     }
 
 }
