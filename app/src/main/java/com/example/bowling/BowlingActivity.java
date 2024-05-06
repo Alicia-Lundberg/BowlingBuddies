@@ -25,6 +25,8 @@ import java.util.Locale;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.google.android.material.color.utilities.Score;
+
 import java.util.Random;
 
 public class BowlingActivity extends AppCompatActivity {
@@ -75,19 +77,31 @@ public class BowlingActivity extends AppCompatActivity {
     private ImageView five;
     private ImageView six;
 
+    private int Throw = 0;
+
+    private int pinsDown = 0;
+
+    private int score = 0;
+
+    private int roundCount = 10;
+    private TextView scoreView;
+    private TextView roundView;
+    private TextView throwView;
+
+
     Vibrator vibe;
     private Vibrator vibrator;
     private Handler handler = new Handler();
     private boolean isVibrating = false;
     private MediaPlayer mediaPlayer;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bowling);
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-
 
         mediaPlayer = MediaPlayer.create(this, R.raw.music);
         mediaPlayer.setVolume(0.8f, 0.8f);
@@ -131,6 +145,10 @@ public class BowlingActivity extends AppCompatActivity {
         Button button2 = findViewById(R.id.button2);
         accelerometer = new Accelerometer(this);
 
+        scoreView = (TextView) this.findViewById(R.id.score);
+        roundView = (TextView) this.findViewById(R.id.Round);
+        throwView = (TextView) this.findViewById(R.id.Throw);
+
         accelerometer.setListener(new Accelerometer.Listener() {
             @SuppressLint("ClickableViewAccessibility")
             @Override
@@ -154,7 +172,7 @@ public class BowlingActivity extends AppCompatActivity {
                 button2.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
-                        //När man trycker ner knappen, "kasta" bollen, kan behövas öndra så att kastet sykas med att alla pins faller
+                        //När man släpper kärmen
                         if(event.getAction()==MotionEvent.ACTION_UP){
                             MediaPlayer mediaPlayer = MediaPlayer.create(BowlingActivity.this, R.raw.rolling);
                             mediaPlayer.setVolume(1.0f, 1.0f);
@@ -172,19 +190,52 @@ public class BowlingActivity extends AppCompatActivity {
                             strikeCounter=0;
                             leftCounter=0;
                             rightCounter=0;
+
+
+                            if(Throw == 2 || pinsDown == 6){
+                                Throw = 0;
+                                score = score + pinsDown;
+                                pinsDown = 0;
+                                roundCount -= 1;
+                                //Handler handler = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        resetPins();
+                                    }
+                                }, 2000);
+                            }
+
+                            if(roundCount < 1){
+                                Throw = 0;
+                                score = 0;
+                                pinsDown = 0;
+                                roundCount = 10;
+                                resetPins();
+                                //display score och berätta för användaren att rundan är över
+                            }
+
+                            scoreView.setText("Score " + score);
+                            roundView.setText("Round " + roundCount);
+                            throwView.setText("Throw " + (Throw+ 1)  );
+
+
+                            Log.d("accelerometer",valuesText);
+                            Log.d("counter", Integer.toString(strikeCounter));
+                            Log.d("throw", Integer.toString(Throw));
+                            Log.d("pins", Integer.toString(pinsDown));
+                            Log.d("SCORE", Integer.toString(score));
                             return true;
                         }
 
-                        //När man släpper knappen, reset både pins och boll
+                        //När man trycker på kärmen, reset både pins och boll
                         if(event.getAction()==MotionEvent.ACTION_DOWN){
                             resetBall(orangeBall);
-                            resetPins();
+                            Log.d("SPECIALPINSPECIAL", Integer.toString(pinsDown));
+                            Throw++;
                             return true;
                         }
 
-                        //logga värdena och anropa onScore för att check om det är en score
-                        Log.d("accelerometer",valuesText);
-                        Log.d("counter", Integer.toString(strikeCounter));
                         onScore(tx, ty, tz);
                         return false;
                     }
@@ -192,7 +243,6 @@ public class BowlingActivity extends AppCompatActivity {
 
             }
         });
-
 
 
         kagla6 = (ImageView) findViewById(R.id.kagla6);
@@ -313,6 +363,7 @@ public class BowlingActivity extends AppCompatActivity {
                 }
             }, 400);
 
+            pinsDown = 6;
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -338,6 +389,9 @@ public class BowlingActivity extends AppCompatActivity {
                 }
             }, 400);
 
+            throwBallLeft(orangeBall);
+            //Handler handler = new Handler();
+            pinsDown = 3;
 
             handler.postDelayed(new Runnable() {
                 @Override
@@ -362,6 +416,9 @@ public class BowlingActivity extends AppCompatActivity {
                 }
             }, 400);
 
+            throwBallRight(orangeBall);
+            //Handler handler = new Handler();
+            pinsDown = 3;
 
             handler.postDelayed(new Runnable() {
                 @Override
@@ -428,25 +485,27 @@ public class BowlingActivity extends AppCompatActivity {
     private void kaglaFall(ImageView kagla) {
         Random random = new Random();
         final float kaglarotation;
-        if (random.nextBoolean()) {
+        if(kagla.getRotation() == 0.0) {
             if (random.nextBoolean()) {
-                kaglarotation = kagla.getRotation() - 90f;
-            }else{
-                kaglarotation = kagla.getRotation() - 120f;
+                if (random.nextBoolean()) {
+                    kaglarotation = kagla.getRotation() - 90f;
+                } else {
+                    kaglarotation = kagla.getRotation() - 120f;
+                }
+            } else {
+                if (random.nextBoolean()) {
+                    kaglarotation = kagla.getRotation() + 90f;
+                } else {
+                    kaglarotation = kagla.getRotation() + 120f;
+                }
             }
-        } else {
-            if (random.nextBoolean()) {
-                kaglarotation = kagla.getRotation() + 90f;
-            }else{
-                kaglarotation = kagla.getRotation() + 120f;
-            }
-        }
-        float kaglaplacement = kagla.getHeight() * 0.2f;
-        kagla.animate()
-                .setDuration(300)
-                .rotation(kaglarotation)
-                .translationYBy(kaglaplacement)
-                .start();
+
+            float kaglaplacement = kagla.getHeight() * 0.2f;
+            kagla.animate()
+                    .setDuration(300)
+                    .rotation(kaglarotation)
+                    .translationYBy(kaglaplacement)
+                    .start();
 
         float saturationFactor = 0.5f; // Adjust as needed (0.0f for fully desaturated, 1.0f for original saturation)
 
