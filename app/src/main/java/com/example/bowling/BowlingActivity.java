@@ -83,6 +83,7 @@ public class BowlingActivity extends AppCompatActivity {
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         mediaPlayer = MediaPlayer.create(this, R.raw.music);
+        mediaPlayer.setVolume(0.8f, 0.8f);
         mediaPlayer.setLooping(true); // Gör så musiken spelar på loop i bakgrunden
         mediaPlayer.start();
 
@@ -127,6 +128,18 @@ public class BowlingActivity extends AppCompatActivity {
                     public boolean onTouch(View v, MotionEvent event) {
                         //När man trycker ner knappen, "kasta" bollen, kan behövas öndra så att kastet sykas med att alla pins faller
                         if(event.getAction()==MotionEvent.ACTION_UP){
+                            MediaPlayer mediaPlayer = MediaPlayer.create(BowlingActivity.this, R.raw.rolling);
+                            mediaPlayer.setVolume(1.0f, 1.0f);
+                            mediaPlayer.start();
+                            vibe.vibrate(80);
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mediaPlayer.stop();
+                                    mediaPlayer.release();
+                                }
+                            }, 1500);
                             checkScore();
                             strikeCounter=0;
                             leftCounter=0;
@@ -234,8 +247,14 @@ public class BowlingActivity extends AppCompatActivity {
 
     private void checkScore() {
         if (strikeCounter > 3) {
-            throwBallStrike(orangeBall);
+
             Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                throwBallStrike(orangeBall);
+                }
+            }, 400);
 
             handler.postDelayed(new Runnable() {
                 @Override
@@ -246,15 +265,22 @@ public class BowlingActivity extends AppCompatActivity {
                     kaglaFall(kagla4);
                     kaglaFall(kagla5);
                     kaglaFall(kagla6);
+                    vibe.vibrate(500);
                     MediaPlayer mediaPlayer = MediaPlayer.create(BowlingActivity.this, R.raw.strike);
                     mediaPlayer.start();
                 }
-            }, 600);
+            }, 1000);
             strikeCounter = 0;
         }
         else if (leftCounter > rightCounter && leftCounter > 3) {
-            throwBallLeft(orangeBall);
             Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    throwBallLeft(orangeBall);
+                }
+            }, 400);
+
 
             handler.postDelayed(new Runnable() {
                 @Override
@@ -262,15 +288,23 @@ public class BowlingActivity extends AppCompatActivity {
                     kaglaFall(kagla2);
                     kaglaFall(kagla4);
                     kaglaFall(kagla6);
+                    vibe.vibrate(500);
                     MediaPlayer mediaPlayer = MediaPlayer.create(BowlingActivity.this, R.raw.strike);
                     mediaPlayer.start();
                 }
-            }, 600);
+            }, 1000);
             leftCounter = 0;
         }
         else if (rightCounter >= leftCounter && rightCounter > 3) {
-            throwBallRight(orangeBall);
             Handler handler = new Handler();
+
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    throwBallRight(orangeBall);
+                }
+            }, 400);
+
 
             handler.postDelayed(new Runnable() {
                 @Override
@@ -278,16 +312,31 @@ public class BowlingActivity extends AppCompatActivity {
                     kaglaFall(kagla1);
                     kaglaFall(kagla3);
                     kaglaFall(kagla6);
+                    vibe.vibrate(500);
                     MediaPlayer mediaPlayer = MediaPlayer.create(BowlingActivity.this, R.raw.strike);
                     mediaPlayer.start();
                 }
-            }, 600);
+            }, 1000);
             rightCounter = 0;
         } else{
             if(leftCounter > rightCounter){
-                throwBallMissLeft(orangeBall);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        throwBallMissLeft(orangeBall);
+                    }
+                }, 400);
+
             }else{
-                throwBallMissRight(orangeBall);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        throwBallMissRight(orangeBall);
+                    }
+                }, 400);
+
             }
         }
         Handler handler = new Handler();
