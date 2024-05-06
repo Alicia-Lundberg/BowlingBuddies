@@ -93,6 +93,20 @@ public class BowlingActivity extends AppCompatActivity {
 
     private TextView highScoreView;
 
+    private ImageView throw1;
+    private ImageView throw2;
+    private ImageView round1;
+    private ImageView round2;
+    private ImageView round3;
+    private ImageView round4;
+    private ImageView round5;
+    private ImageView round6;
+    private ImageView round7;
+    private ImageView round8;
+    private ImageView round9;
+    private ImageView round10;
+
+
 
     Vibrator vibe;
     private Vibrator vibrator;
@@ -119,6 +133,19 @@ public class BowlingActivity extends AppCompatActivity {
         mediaPlayer.setVolume(0.8f, 0.8f);
         mediaPlayer.setLooping(true); // Gör så musiken spelar på loop i bakgrunden
         mediaPlayer.start();
+
+        throw1 = (ImageView) findViewById(R.id.throw1);
+        throw2 = (ImageView) findViewById(R.id.throw2);
+        round1 = (ImageView) findViewById(R.id.round1);
+        round2 = (ImageView) findViewById(R.id.round2);
+        round3 = (ImageView) findViewById(R.id.round3);
+        round4 = (ImageView) findViewById(R.id.round4);
+        round5 = (ImageView) findViewById(R.id.round5);
+        round6 = (ImageView) findViewById(R.id.round6);
+        round7 = (ImageView) findViewById(R.id.round7);
+        round8 = (ImageView) findViewById(R.id.round8);
+        round9 = (ImageView) findViewById(R.id.round9);
+        round10 = (ImageView) findViewById(R.id.round10);
 
         ImageButton returnButton = findViewById(R.id.returnButton);
         returnButton.setOnClickListener(new View.OnClickListener() {
@@ -200,7 +227,6 @@ public class BowlingActivity extends AppCompatActivity {
             public void onTranslation(float tx, float ty, float tz) {
                 String valuesText = String.format(Locale.getDefault(),
                         "Accelerometer x: %.1f y: %.1f, z: %.1f", tx, ty,tz);
-
 
                // Detta behövs för att checka att inbromsningen i baksvingen inte räknas som et rakt kast
                fiveZago = fourZago;
@@ -286,6 +312,7 @@ public class BowlingActivity extends AppCompatActivity {
                             resetBall(orangeBall);
                             Log.d("SPECIALPINSPECIAL", Integer.toString(pinsDown));
                             Throw++;
+                            countBalls();
                             return true;
                         }
 
@@ -441,6 +468,7 @@ public class BowlingActivity extends AppCompatActivity {
     private void checkScore() {
         strikePopup = (ImageView) findViewById(R.id.strikepopup);
         sparePopup = (ImageView) findViewById(R.id.sparepopup);
+       // countBalls();
 
         if (strikeCounter > 3) {    //STRIKE!
             Handler handler = new Handler();
@@ -892,6 +920,176 @@ public class BowlingActivity extends AppCompatActivity {
     protected  void onPause(){
         super.onPause();
         accelerometer.unregister();
+    }
+
+
+    private void countBalls() {
+        if (roundCount == 10 && Throw == 1) {
+            round1.clearColorFilter();
+            round2.clearColorFilter();
+            round3.clearColorFilter();
+            round4.clearColorFilter();
+            round5.clearColorFilter();
+            round6.clearColorFilter();
+            round7.clearColorFilter();
+            round8.clearColorFilter();
+            round9.clearColorFilter();
+            round10.clearColorFilter();
+            throw1.setVisibility(View.GONE);
+            throw2.setVisibility(View.VISIBLE);
+        } else if (roundCount == 10 && Throw == 2) {
+            round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            throw1.setVisibility(View.VISIBLE);
+        } else if (roundCount == 9 && Throw == 1) {
+            round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            throw1.setVisibility(View.GONE);
+        } else if (roundCount == 9 && Throw == 2) {
+            round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            throw1.setVisibility(View.VISIBLE);
+        } else if (roundCount == 8 && Throw == 1) {
+            round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            throw1.setVisibility(View.GONE);
+        } else if (roundCount == 8 && Throw == 2) {
+            round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            throw1.setVisibility(View.VISIBLE);
+        } else if (roundCount == 7 && Throw == 1) {
+            round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            throw1.setVisibility(View.GONE);
+        } else if (roundCount == 7 && Throw == 2) {
+            round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round4.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            throw1.setVisibility(View.VISIBLE);
+        } else if (roundCount == 6 && Throw == 1) {
+            round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round4.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            throw1.setVisibility(View.GONE);
+        } else if (roundCount == 6 && Throw == 2) {
+            round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round4.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round5.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            throw1.setVisibility(View.VISIBLE);
+        } else if (roundCount == 5 && Throw == 1) {
+            round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round4.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round5.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            throw1.setVisibility(View.GONE);
+        } else if (roundCount == 5 && Throw == 2) {
+            round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round4.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round5.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round6.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            throw1.setVisibility(View.VISIBLE);
+        } else if (roundCount == 4 && Throw == 1) {
+            round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round4.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round5.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round6.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            throw1.setVisibility(View.GONE);
+        } else if (roundCount == 4 && Throw == 2) {
+            round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round4.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round5.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round6.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round7.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            throw1.setVisibility(View.VISIBLE);
+        } else if (roundCount == 3 && Throw == 1) {
+            round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round4.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round5.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round6.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round7.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            throw1.setVisibility(View.GONE);
+        } else if (roundCount == 3 && Throw == 2) {
+            round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round4.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round5.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round6.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round7.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round8.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            throw1.setVisibility(View.VISIBLE);
+        } else if (roundCount == 2 && Throw == 1) {
+            round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round4.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round5.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round6.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round7.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round8.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            throw1.setVisibility(View.GONE);
+        } else if (roundCount == 2 && Throw == 2) {
+            round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round4.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round5.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round6.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round7.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round8.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round9.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            throw1.setVisibility(View.VISIBLE);
+        } else if (roundCount == 1 && Throw == 1) {
+            round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round4.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round5.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round6.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round7.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round8.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            round9.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            throw1.setVisibility(View.GONE);
+        } else if (roundCount == 1 && Throw == 2) {
+            round1.clearColorFilter();
+            round2.clearColorFilter();
+            round3.clearColorFilter();
+            round4.clearColorFilter();
+            round5.clearColorFilter();
+            round6.clearColorFilter();
+            round7.clearColorFilter();
+            round8.clearColorFilter();
+            round9.clearColorFilter();
+            round10.clearColorFilter();
+            throw1.setVisibility(View.VISIBLE);
+            throw2.setVisibility(View.VISIBLE);
+        } else {
+            round1.clearColorFilter();
+            round2.clearColorFilter();
+            round3.clearColorFilter();
+            round4.clearColorFilter();
+            round5.clearColorFilter();
+            round6.clearColorFilter();
+            round7.clearColorFilter();
+            round8.clearColorFilter();
+            round9.clearColorFilter();
+            round10.clearColorFilter();
+            throw1.setVisibility(View.VISIBLE);
+            throw2.setVisibility(View.VISIBLE);
+        }
     }
 
 }
