@@ -91,6 +91,8 @@ public class BowlingActivity extends AppCompatActivity {
     private TextView roundView;
     private TextView throwView;
 
+    private TextView highScoreView;
+
 
     Vibrator vibe;
     private Vibrator vibrator;
@@ -190,6 +192,7 @@ public class BowlingActivity extends AppCompatActivity {
         scoreView = (TextView) this.findViewById(R.id.score);
         roundView = (TextView) this.findViewById(R.id.Round);
         throwView = (TextView) this.findViewById(R.id.Throw);
+        highScoreView = (TextView) this.findViewById(R.id.highScore);
 
         accelerometer.setListener(new Accelerometer.Listener() {
             @SuppressLint("ClickableViewAccessibility")
@@ -266,6 +269,7 @@ public class BowlingActivity extends AppCompatActivity {
                             scoreView.setText("Score " + score);
                             roundView.setText("Round " + roundCount);
                             throwView.setText("Throw " + (Throw+ 1)  );
+                            highScoreView.setText("Highscore " + highScore);
 
 
                             Log.d("accelerometer",valuesText);
