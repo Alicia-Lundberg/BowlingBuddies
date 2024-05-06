@@ -201,7 +201,7 @@ public class BowlingActivity extends AppCompatActivity {
                                 handler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        resetPins();
+                                        resetGame();
                                     }
                                 }, 2000);
                             }
@@ -211,7 +211,7 @@ public class BowlingActivity extends AppCompatActivity {
                                 score = 0;
                                 pinsDown = 0;
                                 roundCount = 10;
-                                resetPins();
+                                resetGame();
                                 //display score och berätta för användaren att rundan är över
                             }
 
@@ -485,7 +485,7 @@ public class BowlingActivity extends AppCompatActivity {
     private void kaglaFall(ImageView kagla) {
         Random random = new Random();
         final float kaglarotation;
-        if(kagla.getRotation() == 0.0) {
+        if (kagla.getRotation() == 0.0) {
             if (random.nextBoolean()) {
                 if (random.nextBoolean()) {
                     kaglarotation = kagla.getRotation() - 90f;
@@ -507,15 +507,16 @@ public class BowlingActivity extends AppCompatActivity {
                     .translationYBy(kaglaplacement)
                     .start();
 
-        float saturationFactor = 0.5f; // Adjust as needed (0.0f for fully desaturated, 1.0f for original saturation)
+            float saturationFactor = 0.5f; // Adjust as needed (0.0f for fully desaturated, 1.0f for original saturation)
 
 
-        one.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-        two.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-        three.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-        four.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-        five.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-        six.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            one.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            two.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            three.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            four.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            five.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            six.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+        }
     }
 
     private void resetPins() {
