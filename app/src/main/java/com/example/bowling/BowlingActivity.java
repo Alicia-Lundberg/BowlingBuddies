@@ -25,6 +25,7 @@ import android.widget.TextView;
 import java.util.Locale;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.content.SharedPreferences; // Till highscore
 
 import com.google.android.material.color.utilities.Score;
 
@@ -97,6 +98,9 @@ public class BowlingActivity extends AppCompatActivity {
     private boolean isVibrating = false;
     private MediaPlayer mediaPlayer;
 
+    private int highScore;
+    private SharedPreferences sharedPreferences;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +108,9 @@ public class BowlingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bowling);
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+        sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE); //Highscore
+        highScore = sharedPreferences.getInt("highScore", 0);
 
 
         mediaPlayer = MediaPlayer.create(this, R.raw.music);
@@ -242,6 +249,12 @@ public class BowlingActivity extends AppCompatActivity {
                             }
 
                             if(roundCount < 1){
+                                if (score > highScore) {
+                                    highScore = score;
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putInt("highScore", highScore);
+                                    editor.apply(); // kanske editor.commit()
+                                }
                                 Throw = 0;
                                 score = 0;
                                 pinsDown = 0;
@@ -260,6 +273,7 @@ public class BowlingActivity extends AppCompatActivity {
                             Log.d("throw", Integer.toString(Throw));
                             Log.d("pins", Integer.toString(pinsDown));
                             Log.d("SCORE", Integer.toString(score));
+                            Log.d("Highscore", Integer.toString(highScore));
                             return true;
                         }
 
