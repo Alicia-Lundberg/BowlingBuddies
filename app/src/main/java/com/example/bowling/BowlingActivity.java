@@ -1,26 +1,26 @@
 package com.example.bowling;
 
 import static java.lang.Math.random;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.PorterDuff;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
-import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.media.MediaPlayer;
-import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.Locale;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -28,7 +28,12 @@ import android.widget.ImageView;
 import java.util.Random;
 
 public class BowlingActivity extends AppCompatActivity {
-
+    private ImageView person1, person2, person3;
+    private TextView text1, text2, text3;
+    //private Handler handler;
+    private int counter = 0;
+    private PopupWindow popupWindow;
+    private Runnable runnable;
     private Accelerometer accelerometer;
     private Gyroscope gyroscope;
     private TextView accelerometerValuesTextView;
@@ -42,6 +47,7 @@ public class BowlingActivity extends AppCompatActivity {
     private ImageView kagla5;
     private ImageView kagla6;
     private ImageView orangeBall;
+    private ImageView strikePopup;
 
     private int strikeCounter;
 
@@ -82,6 +88,7 @@ public class BowlingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bowling);
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
+
         mediaPlayer = MediaPlayer.create(this, R.raw.music);
         mediaPlayer.setLooping(true); // Gör så musiken spelar på loop i bakgrunden
         mediaPlayer.start();
@@ -89,13 +96,34 @@ public class BowlingActivity extends AppCompatActivity {
         ImageButton returnButton = findViewById(R.id.returnButton);
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { //stänger av musiken när man går till hemskärm
                 if (mediaPlayer != null && mediaPlayer.isPlaying()) {
                     mediaPlayer.stop();
                     mediaPlayer.release();
                     mediaPlayer = null;
                 }
                 startActivity(new Intent(BowlingActivity.this, MainActivity.class));
+            }
+        });
+
+        ImageButton leaderboard = findViewById(R.id.leaderboard);
+        leaderboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { //stänger av musiken när man går till hemskärm
+                if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+                    mediaPlayer.stop();
+                    mediaPlayer.release();
+                    mediaPlayer = null;
+                }
+                startActivity(new Intent(BowlingActivity.this, LeaderboardActivity.class));
+            }
+        });
+
+        ImageButton info = findViewById(R.id.infoIcon);
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onButtonShowPopupWindowClick(v);
             }
         });
 
@@ -193,6 +221,35 @@ public class BowlingActivity extends AppCompatActivity {
             @Override
             public void onClick (View v){
                 resetPins();
+            }
+        });
+
+        strikePopup = (ImageView) findViewById(R.id.strikepopup);
+        Button testStrikeAnimation = findViewById(R.id.testStrikeAnimation);
+        testStrikeAnimation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v){
+                strikePopup.setScaleX(0.1f);
+                strikePopup.setScaleY(0.1f);
+                strikePopup.setVisibility(View.VISIBLE);
+
+                strikePopup.animate()
+                        .setDuration(700)
+                        .scaleX(1.0f)
+                        .scaleY(1.0f)
+                        .withEndAction(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Keep the ImageView visible for two seconds before hiding it
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        strikePopup.setVisibility(View.GONE);
+                                    }
+                                }, 2000);
+                            }
+                        })
+                        .start();
             }
         });
 
@@ -342,12 +399,15 @@ public class BowlingActivity extends AppCompatActivity {
                 .translationYBy(kaglaplacement)
                 .start();
 
-        one.setVisibility(View.INVISIBLE);
-        two.setVisibility(View.INVISIBLE);
-        //three.setVisibility(View.INVISIBLE);
-        four.setVisibility(View.INVISIBLE);
-        five.setVisibility(View.INVISIBLE);
-        six.setVisibility(View.INVISIBLE);
+        float saturationFactor = 0.5f; // Adjust as needed (0.0f for fully desaturated, 1.0f for original saturation)
+
+
+        one.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+        two.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+        three.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+        four.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+        five.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+        six.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
     }
 
     private void resetPins() {
@@ -369,12 +429,12 @@ public class BowlingActivity extends AppCompatActivity {
     private void resetGame(){
         resetPins();
         resetBall(orangeBall);
-        one.setVisibility(View.VISIBLE);
-        two.setVisibility(View.VISIBLE);
-        three.setVisibility(View.VISIBLE);
-        four.setVisibility(View.VISIBLE);
-        five.setVisibility(View.VISIBLE);
-        six.setVisibility(View.VISIBLE);
+        one.clearColorFilter();
+        two.clearColorFilter();
+        three.clearColorFilter();
+        four.clearColorFilter();
+        five.clearColorFilter();
+        six.clearColorFilter();
     }
 
     private void resetBall(ImageView ball) {
@@ -487,6 +547,85 @@ public class BowlingActivity extends AppCompatActivity {
                     }
                 })
                 .start();
+    }
+
+
+    public void onButtonShowPopupWindowClick(View v) {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.activity_info, null);
+
+        person1 = popupView.findViewById(R.id.person1);
+        person2 = popupView.findViewById(R.id.person2);
+        person3 = popupView.findViewById(R.id.person3);
+        text1 = popupView.findViewById(R.id.text1);
+        text2 = popupView.findViewById(R.id.text2);
+        text3 = popupView.findViewById(R.id.text3);
+
+        hideEverything();
+
+        handler = new Handler();
+
+        popupLoop();
+
+        // Create the popup window
+        int width = 1000;
+        int height = 1200;
+        boolean focusable = true;
+        popupWindow = new PopupWindow(popupView, width, height, focusable);
+        popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                counter = 0;
+                handler.removeCallbacks(runnable);
+            }
+        });
+    }
+
+    private void popupLoop() {
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                switch (counter) {
+                    case 0:
+                        hideEverything();
+                        person2.setVisibility(View.VISIBLE);
+                        text2.setVisibility(View.VISIBLE);
+                        break;
+                    case 1:
+                        hideEverything();
+                        person1.setVisibility(View.VISIBLE);
+                        text1.setVisibility(View.VISIBLE);
+                        break;
+                    case 2:
+                        hideEverything();
+                        person3.setVisibility(View.VISIBLE);
+                        text3.setVisibility(View.VISIBLE);
+                        break;
+                }
+                counter = (counter + 1) % 3;
+                handler.postDelayed(this, 1500);
+            }
+        };
+
+        handler.postDelayed(runnable, 1500);
+    }
+
+    private void hideEverything() {
+        person1.setVisibility(View.GONE);
+        person2.setVisibility(View.GONE);
+        person3.setVisibility(View.GONE);
+        text1.setVisibility(View.GONE);
+        text2.setVisibility(View.GONE);
+        text3.setVisibility(View.GONE);
     }
 
     @Override
