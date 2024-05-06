@@ -25,6 +25,8 @@ import java.util.Locale;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.google.android.material.color.utilities.Score;
+
 import java.util.Random;
 
 public class BowlingActivity extends AppCompatActivity {
@@ -69,12 +71,22 @@ public class BowlingActivity extends AppCompatActivity {
     private ImageView five;
     private ImageView six;
 
+    private int Throw = 0;
+
+    private int pinsDown = 0;
+
+    private int score = 0;
+
+    private int roundCount = 10;
+
+
     Vibrator vibe;
     private Vibrator vibrator;
     private Handler handler = new Handler();
     private boolean isVibrating = false;
     private MediaPlayer mediaPlayer;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -125,25 +137,60 @@ public class BowlingActivity extends AppCompatActivity {
                 button2.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
-                        //När man trycker ner knappen, "kasta" bollen, kan behövas öndra så att kastet sykas med att alla pins faller
+                        //När man släpper kärmen
                         if(event.getAction()==MotionEvent.ACTION_UP){
                             checkScore();
                             strikeCounter=0;
                             leftCounter=0;
                             rightCounter=0;
+
+
+                            if(Throw == 2 || pinsDown == 6){
+                                Throw = 0;
+                                score = score + pinsDown;
+                                pinsDown = 0;
+                                roundCount -= 1;
+                                Handler handler = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        resetPins();
+                                    }
+                                }, 2000);
+                            }
+
+                            if(roundCount < 1){
+                                Throw = 0;
+                                score = 0;
+                                pinsDown = 0;
+                                roundCount = 10;
+                                resetPins();
+                                //display score och berätta för användaren att rundan är över
+                            }
+                            /*
+                            TextView scoreView = (TextView) this.findViewById(R.id.score);
+                            TextView roundView = (TextView) this.findViewById(R.id.Round);
+                            TextView throwView = (TextView) this.findViewById(R.id.Throw);
+                            scoreView.setText("Score " + score);
+                            roundView.setText("Round " + roundCount);
+                            throwView.setText("Throw " + Throw);
+                            */
+                            Log.d("accelerometer",valuesText);
+                            Log.d("counter", Integer.toString(strikeCounter));
+                            Log.d("throw", Integer.toString(Throw));
+                            Log.d("pins", Integer.toString(pinsDown));
+                            Log.d("SCORE", Integer.toString(score));
                             return true;
                         }
 
-                        //När man släpper knappen, reset både pins och boll
+                        //När man trycker på kärmen, reset både pins och boll
                         if(event.getAction()==MotionEvent.ACTION_DOWN){
                             resetBall(orangeBall);
-                            resetPins();
+                            Log.d("SPECIALPINSPECIAL", Integer.toString(pinsDown));
+                            Throw++;
                             return true;
                         }
 
-                        //logga värdena och anropa onScore för att check om det är en score
-                        Log.d("accelerometer",valuesText);
-                        Log.d("counter", Integer.toString(strikeCounter));
                         onScore(tx, ty, tz);
                         return false;
                     }
@@ -236,7 +283,7 @@ public class BowlingActivity extends AppCompatActivity {
         if (strikeCounter > 3) {
             throwBallStrike(orangeBall);
             Handler handler = new Handler();
-
+            pinsDown = 6;
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -255,6 +302,7 @@ public class BowlingActivity extends AppCompatActivity {
         else if (leftCounter > rightCounter && leftCounter > 3) {
             throwBallLeft(orangeBall);
             Handler handler = new Handler();
+            pinsDown = 3;
 
             handler.postDelayed(new Runnable() {
                 @Override
@@ -271,6 +319,7 @@ public class BowlingActivity extends AppCompatActivity {
         else if (rightCounter >= leftCounter && rightCounter > 3) {
             throwBallRight(orangeBall);
             Handler handler = new Handler();
+            pinsDown = 3;
 
             handler.postDelayed(new Runnable() {
                 @Override
@@ -322,32 +371,35 @@ public class BowlingActivity extends AppCompatActivity {
     private void kaglaFall(ImageView kagla) {
         Random random = new Random();
         final float kaglarotation;
-        if (random.nextBoolean()) {
+        if(kagla.getRotation() == 0.0) {
             if (random.nextBoolean()) {
-                kaglarotation = kagla.getRotation() - 90f;
-            }else{
-                kaglarotation = kagla.getRotation() - 120f;
+                if (random.nextBoolean()) {
+                    kaglarotation = kagla.getRotation() - 90f;
+                } else {
+                    kaglarotation = kagla.getRotation() - 120f;
+                }
+            } else {
+                if (random.nextBoolean()) {
+                    kaglarotation = kagla.getRotation() + 90f;
+                } else {
+                    kaglarotation = kagla.getRotation() + 120f;
+                }
             }
-        } else {
-            if (random.nextBoolean()) {
-                kaglarotation = kagla.getRotation() + 90f;
-            }else{
-                kaglarotation = kagla.getRotation() + 120f;
-            }
-        }
-        float kaglaplacement = kagla.getHeight() * 0.2f;
-        kagla.animate()
-                .setDuration(300)
-                .rotation(kaglarotation)
-                .translationYBy(kaglaplacement)
-                .start();
 
-        one.setVisibility(View.INVISIBLE);
-        two.setVisibility(View.INVISIBLE);
-        //three.setVisibility(View.INVISIBLE);
-        four.setVisibility(View.INVISIBLE);
-        five.setVisibility(View.INVISIBLE);
-        six.setVisibility(View.INVISIBLE);
+            float kaglaplacement = kagla.getHeight() * 0.2f;
+            kagla.animate()
+                    .setDuration(300)
+                    .rotation(kaglarotation)
+                    .translationYBy(kaglaplacement)
+                    .start();
+
+            one.setVisibility(View.INVISIBLE);
+            two.setVisibility(View.INVISIBLE);
+            //three.setVisibility(View.INVISIBLE);
+            four.setVisibility(View.INVISIBLE);
+            five.setVisibility(View.INVISIBLE);
+            six.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void resetPins() {
