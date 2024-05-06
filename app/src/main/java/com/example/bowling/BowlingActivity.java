@@ -62,7 +62,7 @@ public class BowlingActivity extends AppCompatActivity {
 
     private boolean ThreeIsPositive = true;
 
-   private float zNow = 1;
+    private float zNow = 1;
 
     private float oneZago = 1;
 
@@ -228,18 +228,18 @@ public class BowlingActivity extends AppCompatActivity {
                 String valuesText = String.format(Locale.getDefault(),
                         "Accelerometer x: %.1f y: %.1f, z: %.1f", tx, ty,tz);
 
-               // Detta behövs för att checka att inbromsningen i baksvingen inte räknas som et rakt kast
-               fiveZago = fourZago;
-               fourZago = threeZago;
-               threeZago = twoZago;
-               twoZago = oneZago;
-               oneZago = zNow;
-               zNow = tz;
-               if (fiveZago < 0) {
-                   strikeCounter = 0;
-                   rightCounter = 0;
-                   leftCounter = 0;
-               }
+                // Detta behövs för att checka att inbromsningen i baksvingen inte räknas som et rakt kast
+                fiveZago = fourZago;
+                fourZago = threeZago;
+                threeZago = twoZago;
+                twoZago = oneZago;
+                oneZago = zNow;
+                zNow = tz;
+                if (fiveZago < 0) {
+                    strikeCounter = 0;
+                    rightCounter = 0;
+                    leftCounter = 0;
+                }
                 button2.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
@@ -468,14 +468,14 @@ public class BowlingActivity extends AppCompatActivity {
     private void checkScore() {
         strikePopup = (ImageView) findViewById(R.id.strikepopup);
         sparePopup = (ImageView) findViewById(R.id.sparepopup);
-       // countBalls();
+        // countBalls();
 
         if (strikeCounter > 3) {    //STRIKE!
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                throwBallStrike(orangeBall);
+                    throwBallStrike(orangeBall);
                 }
             }, 400);
 
