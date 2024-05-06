@@ -290,6 +290,14 @@ public class BowlingActivity extends AppCompatActivity {
                 throwBallMissRight(orangeBall);
             }
         }
+        Handler handler = new Handler();
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                resetBall(orangeBall);
+            }
+        }, 1500);
     }
     private void onScore(float tx, float ty, float tz) {
         if(ty < -1 && tz > 1){
