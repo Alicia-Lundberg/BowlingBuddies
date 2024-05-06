@@ -18,6 +18,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageButton
+        android:id="@+id/infoIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.816"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.982"
+        app:srcCompat="@drawable/infoicon" />
+
+    <ImageButton
+        android:id="@+id/settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.984"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.983"
+        app:srcCompat="@drawable/settings" />
+
     <ImageView
         android:id="@+id/kagla6"
         android:layout_width="75dp"
@@ -180,16 +206,16 @@
     <ImageButton
         android:id="@+id/leaderboard"
         android:layout_width="55dp"
-        android:layout_height="55dp"
+        android:layout_height="45dp"
         android:background="@android:color/transparent"
         android:labelFor="@id/leaderboard"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.981"
+        app:layout_constraintHorizontal_bias="0.983"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/leaderboardicon"
+        app:srcCompat="@drawable/lightleaderboardicon"
         tools:ignore="MissingConstraints" />
 
     <ImageView
@@ -204,8 +230,9 @@
 
     <ImageView
         android:id="@+id/strikepopup"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="600dp"
+        android:layout_height="600dp"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -231,8 +258,8 @@
         android:id="@+id/resetGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="296dp"
-        android:layout_marginTop="628dp"
+        android:layout_marginStart="304dp"
+        android:layout_marginTop="360dp"
         android:text="Reset game"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -241,8 +268,8 @@
         android:id="@+id/testStrikeAnimation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="304dp"
-        android:layout_marginTop="676dp"
+        android:layout_marginStart="316dp"
+        android:layout_marginTop="416dp"
         android:text="strike!"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

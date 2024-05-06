@@ -14,9 +14,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import java.util.Locale;
 import android.widget.ImageButton;
@@ -25,7 +28,12 @@ import android.widget.ImageView;
 import java.util.Random;
 
 public class BowlingActivity extends AppCompatActivity {
-
+    private ImageView person1, person2, person3;
+    private TextView text1, text2, text3;
+    //private Handler handler;
+    private int counter = 0;
+    private PopupWindow popupWindow;
+    private Runnable runnable;
     private Accelerometer accelerometer;
     private Gyroscope gyroscope;
     private TextView accelerometerValuesTextView;
@@ -108,6 +116,14 @@ public class BowlingActivity extends AppCompatActivity {
                     mediaPlayer = null;
                 }
                 startActivity(new Intent(BowlingActivity.this, LeaderboardActivity.class));
+            }
+        });
+
+        ImageButton info = findViewById(R.id.infoIcon);
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onButtonShowPopupWindowClick(v);
             }
         });
 
@@ -523,6 +539,85 @@ public class BowlingActivity extends AppCompatActivity {
                     }
                 })
                 .start();
+    }
+
+
+    public void onButtonShowPopupWindowClick(View v) {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.activity_info, null);
+
+        person1 = popupView.findViewById(R.id.person1);
+        person2 = popupView.findViewById(R.id.person2);
+        person3 = popupView.findViewById(R.id.person3);
+        text1 = popupView.findViewById(R.id.text1);
+        text2 = popupView.findViewById(R.id.text2);
+        text3 = popupView.findViewById(R.id.text3);
+
+        hideEverything();
+
+        handler = new Handler();
+
+        popupLoop();
+
+        // Create the popup window
+        int width = 1000;
+        int height = 1200;
+        boolean focusable = true;
+        popupWindow = new PopupWindow(popupView, width, height, focusable);
+        popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                counter = 0;
+                handler.removeCallbacks(runnable);
+            }
+        });
+    }
+
+    private void popupLoop() {
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                switch (counter) {
+                    case 0:
+                        hideEverything();
+                        person2.setVisibility(View.VISIBLE);
+                        text2.setVisibility(View.VISIBLE);
+                        break;
+                    case 1:
+                        hideEverything();
+                        person1.setVisibility(View.VISIBLE);
+                        text1.setVisibility(View.VISIBLE);
+                        break;
+                    case 2:
+                        hideEverything();
+                        person3.setVisibility(View.VISIBLE);
+                        text3.setVisibility(View.VISIBLE);
+                        break;
+                }
+                counter = (counter + 1) % 3;
+                handler.postDelayed(this, 1500);
+            }
+        };
+
+        handler.postDelayed(runnable, 1500);
+    }
+
+    private void hideEverything() {
+        person1.setVisibility(View.GONE);
+        person2.setVisibility(View.GONE);
+        person3.setVisibility(View.GONE);
+        text1.setVisibility(View.GONE);
+        text2.setVisibility(View.GONE);
+        text3.setVisibility(View.GONE);
     }
 
     @Override

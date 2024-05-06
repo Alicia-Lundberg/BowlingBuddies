@@ -11,7 +11,7 @@
     <ImageButton
         android:id="@+id/returnButton"
         android:layout_width="44dp"
-        android:layout_height="49dp"
+        android:layout_height="40dp"
         android:background="@android:color/transparent"
         android:labelFor="@id/returnButton"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/newreturn"
+        app:srcCompat="@drawable/orangereturn"
         tools:ignore="MissingConstraints" />
 
 
