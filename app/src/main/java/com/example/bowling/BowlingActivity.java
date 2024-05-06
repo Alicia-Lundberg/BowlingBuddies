@@ -190,7 +190,7 @@ public class BowlingActivity extends AppCompatActivity {
         accelerometer = new Accelerometer(this);
 
         scoreView = (TextView) this.findViewById(R.id.score);
-        roundView = (TextView) this.findViewById(R.id.Round);
+        roundView = (TextView) this.findViewById(R.id.round11); // Den blev round 11 venne varför
         throwView = (TextView) this.findViewById(R.id.Throw);
         highScoreView = (TextView) this.findViewById(R.id.highScore);
 
