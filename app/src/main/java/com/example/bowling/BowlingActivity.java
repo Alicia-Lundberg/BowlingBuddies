@@ -78,6 +78,9 @@ public class BowlingActivity extends AppCompatActivity {
     private int score = 0;
 
     private int roundCount = 10;
+    private TextView scoreView;
+    private TextView roundView;
+    private TextView throwView;
 
 
     Vibrator vibe;
@@ -113,6 +116,10 @@ public class BowlingActivity extends AppCompatActivity {
 
         Button button2 = findViewById(R.id.button2);
         accelerometer = new Accelerometer(this);
+
+        scoreView = (TextView) this.findViewById(R.id.score);
+        roundView = (TextView) this.findViewById(R.id.Round);
+        throwView = (TextView) this.findViewById(R.id.Throw);
 
         accelerometer.setListener(new Accelerometer.Listener() {
             @SuppressLint("ClickableViewAccessibility")
@@ -167,14 +174,12 @@ public class BowlingActivity extends AppCompatActivity {
                                 resetPins();
                                 //display score och berätta för användaren att rundan är över
                             }
-                            /*
-                            TextView scoreView = (TextView) this.findViewById(R.id.score);
-                            TextView roundView = (TextView) this.findViewById(R.id.Round);
-                            TextView throwView = (TextView) this.findViewById(R.id.Throw);
+
                             scoreView.setText("Score " + score);
                             roundView.setText("Round " + roundCount);
-                            throwView.setText("Throw " + Throw);
-                            */
+                            throwView.setText("Throw " + (Throw+ 1)  );
+
+
                             Log.d("accelerometer",valuesText);
                             Log.d("counter", Integer.toString(strikeCounter));
                             Log.d("throw", Integer.toString(Throw));
@@ -198,7 +203,6 @@ public class BowlingActivity extends AppCompatActivity {
 
             }
         });
-
 
 
         kagla6 = (ImageView) findViewById(R.id.kagla6);
