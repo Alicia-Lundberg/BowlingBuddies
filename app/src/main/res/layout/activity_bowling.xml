@@ -7,6 +7,7 @@
     android:background="@drawable/neewestalley"
     tools:context=".BowlingActivity">
 
+
     <Button
         android:id="@+id/bowlingButton"
         android:layout_width="wrap_content"
@@ -228,19 +229,34 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/orangeball_2" />
 
+
     <ImageView
         android:id="@+id/strikepopup"
-        android:layout_width="600dp"
-        android:layout_height="600dp"
+        android:layout_width="400dp"
+        android:layout_height="450dp"
         android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.558"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.549"
+        app:layout_constraintVertical_bias="0.653"
         android:visibility="gone"
-        app:srcCompat="@drawable/strike" />
+        app:srcCompat="@drawable/strikesimple" />
+
+    <ImageView
+        android:id="@+id/sparepopup"
+        android:layout_width="400dp"
+        android:layout_height="450dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.558"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
+        app:layout_constraintVertical_bias="0.722"
+        app:srcCompat="@drawable/sparesimple" />
 
     <Button
         android:id="@+id/resetPins"
@@ -258,8 +274,8 @@
         android:id="@+id/resetGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="304dp"
-        android:layout_marginTop="360dp"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="404dp"
         android:text="Reset game"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -268,9 +284,19 @@
         android:id="@+id/testStrikeAnimation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="316dp"
-        android:layout_marginTop="416dp"
+        android:layout_marginStart="324dp"
+        android:layout_marginTop="480dp"
         android:text="strike!"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/testSpareAnimation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="324dp"
+        android:layout_marginTop="544dp"
+        android:text="spare!"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

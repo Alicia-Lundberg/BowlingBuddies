@@ -50,6 +50,7 @@ public class BowlingActivity extends AppCompatActivity {
     private ImageView kagla6;
     private ImageView orangeBall;
     private ImageView strikePopup;
+    private ImageView sparePopup;
 
     private int strikeCounter;
 
@@ -103,6 +104,7 @@ public class BowlingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bowling);
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
+
         mediaPlayer = MediaPlayer.create(this, R.raw.music);
         mediaPlayer.setVolume(0.8f, 0.8f);
         mediaPlayer.setLooping(true); // Gör så musiken spelar på loop i bakgrunden
@@ -119,6 +121,24 @@ public class BowlingActivity extends AppCompatActivity {
                 }
                 startActivity(new Intent(BowlingActivity.this, MainActivity.class));
             }
+        });
+
+        ImageButton settings = findViewById(R.id.settings);
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupWindow popupWindow = new PopupWindow(BowlingActivity.this);
+
+                View popupView = getLayoutInflater().inflate(R.layout.activity_notimplemented, null);
+
+                popupWindow.setContentView(popupView);
+
+                popupWindow.setOutsideTouchable(true);
+                popupWindow.setFocusable(true);
+
+                popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+            }
+
         });
 
         ImageButton leaderboard = findViewById(R.id.leaderboard);
@@ -236,6 +256,9 @@ public class BowlingActivity extends AppCompatActivity {
                             return true;
                         }
 
+                        //logga värdena och anropa onScore för att check om det är en score
+                        Log.d("accelerometer",valuesText);
+                        Log.d("counter", Integer.toString(strikeCounter));
                         onScore(tx, ty, tz);
                         return false;
                     }
@@ -243,6 +266,7 @@ public class BowlingActivity extends AppCompatActivity {
 
             }
         });
+
 
 
         kagla6 = (ImageView) findViewById(R.id.kagla6);
@@ -317,6 +341,35 @@ public class BowlingActivity extends AppCompatActivity {
         });
 
 
+        sparePopup = (ImageView) findViewById(R.id.sparepopup);
+        Button testSpareAnimation = findViewById(R.id.testSpareAnimation);
+        testSpareAnimation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v){
+                sparePopup.setScaleX(0.1f);
+                sparePopup.setScaleY(0.1f);
+                sparePopup.setVisibility(View.VISIBLE);
+
+                sparePopup.animate()
+                        .setDuration(700)
+                        .scaleX(1.0f)
+                        .scaleY(1.0f)
+                        .withEndAction(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Keep the ImageView visible for two seconds before hiding it
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        sparePopup.setVisibility(View.GONE);
+                                    }
+                                }, 2000);
+                            }
+                        })
+                        .start();
+            }
+        });
+
 
         Button resetGame = findViewById(R.id.resetGame);
         resetGame.setOnClickListener(new View.OnClickListener() {
@@ -353,8 +406,10 @@ public class BowlingActivity extends AppCompatActivity {
     }
 
     private void checkScore() {
-        if (strikeCounter > 3) {
+        strikePopup = (ImageView) findViewById(R.id.strikepopup);
+        sparePopup = (ImageView) findViewById(R.id.sparepopup);
 
+        if (strikeCounter > 3) {    //STRIKE!
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
@@ -373,14 +428,42 @@ public class BowlingActivity extends AppCompatActivity {
                     kaglaFall(kagla4);
                     kaglaFall(kagla5);
                     kaglaFall(kagla6);
+                    one.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    two.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    three.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    four.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    five.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    six.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
                     vibe.vibrate(500);
                     MediaPlayer mediaPlayer = MediaPlayer.create(BowlingActivity.this, R.raw.strike);
                     mediaPlayer.start();
+
+                    strikePopup.setScaleX(0.1f);
+                    strikePopup.setScaleY(0.1f);
+                    strikePopup.setVisibility(View.VISIBLE);
+                    strikePopup.animate()
+                            .setDuration(700)
+                            .scaleX(1.0f)
+                            .scaleY(1.0f)
+                            .withEndAction(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Keep the ImageView visible for two seconds before hiding it
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            strikePopup.setVisibility(View.GONE);
+                                        }
+                                    }, 2000);
+                                }
+                            })
+                            .start();
                 }
             }, 1000);
             strikeCounter = 0;
         }
-        else if (leftCounter > rightCounter && leftCounter > 3) {
+
+        else if (leftCounter > rightCounter && leftCounter > 3) {   //3 i mitten trillar
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
@@ -399,6 +482,9 @@ public class BowlingActivity extends AppCompatActivity {
                     kaglaFall(kagla2);
                     kaglaFall(kagla4);
                     kaglaFall(kagla6);
+                    two.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    four.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    six.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
                     vibe.vibrate(500);
                     MediaPlayer mediaPlayer = MediaPlayer.create(BowlingActivity.this, R.raw.strike);
                     mediaPlayer.start();
@@ -416,7 +502,7 @@ public class BowlingActivity extends AppCompatActivity {
                 }
             }, 400);
 
-            throwBallRight(orangeBall);
+            //throwBallRight(orangeBall);
             //Handler handler = new Handler();
             pinsDown = 3;
 
@@ -426,14 +512,40 @@ public class BowlingActivity extends AppCompatActivity {
                     kaglaFall(kagla1);
                     kaglaFall(kagla3);
                     kaglaFall(kagla6);
+                    one.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    three.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    six.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
                     vibe.vibrate(500);
                     MediaPlayer mediaPlayer = MediaPlayer.create(BowlingActivity.this, R.raw.strike);
                     mediaPlayer.start();
+
+
+                    //SPARE!!! (flytta på denna sen)
+                    strikePopup.setScaleX(0.1f);
+                    strikePopup.setScaleY(0.1f);
+                    strikePopup.setVisibility(View.VISIBLE);
+                    strikePopup.animate()
+                            .setDuration(700)
+                            .scaleX(1.0f)
+                            .scaleY(1.0f)
+                            .withEndAction(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Keep the ImageView visible for two seconds before hiding it
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            strikePopup.setVisibility(View.GONE);
+                                        }
+                                    }, 2000);
+                                }
+                            })
+                            .start();
                 }
             }, 1000);
             rightCounter = 0;
         } else{
-            if(leftCounter > rightCounter){
+            if(leftCounter > rightCounter){ //MISS
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -517,7 +629,7 @@ public class BowlingActivity extends AppCompatActivity {
             five.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
             six.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
         }
-    }
+    } //kolla klammrar
 
     private void resetPins() {
         kagla6.setRotation(0f);
