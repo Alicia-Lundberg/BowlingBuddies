@@ -10,11 +10,14 @@
         android:layout_width="300dp"
         android:layout_height="400dp"
         android:layout_centerInParent="true"
-        android:layout_margin="30dp"
-        android:textSize="25sp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:text="How to play"
         android:textColor="#000000"
-        android:textStyle="bold"
-        android:text="How to play"/>
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/person1"
@@ -61,7 +64,7 @@
         android:layout_margin="30dp"
         android:textSize="22sp"
         android:textColor="#000000"
-        android:text="1.Hold the button"/>
+        android:text="1.Hold the bowlingball"/>
     <TextView
         android:id="@+id/text3"
         android:layout_width="300dp"
@@ -70,6 +73,6 @@
         android:layout_margin="30dp"
         android:textSize="22sp"
         android:textColor="#000000"
-        android:text="3.Release the button"/>
+        android:text="3.Release the bowlingball"/>
 
 </RelativeLayout>

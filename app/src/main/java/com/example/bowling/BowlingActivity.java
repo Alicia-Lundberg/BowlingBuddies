@@ -107,6 +107,24 @@ public class BowlingActivity extends AppCompatActivity {
             }
         });
 
+        ImageButton settings = findViewById(R.id.settings);
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupWindow popupWindow = new PopupWindow(BowlingActivity.this);
+
+                View popupView = getLayoutInflater().inflate(R.layout.activity_notimplemented, null);
+
+                popupWindow.setContentView(popupView);
+
+                popupWindow.setOutsideTouchable(true);
+                popupWindow.setFocusable(true);
+
+                popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+            }
+
+        });
+
         ImageButton leaderboard = findViewById(R.id.leaderboard);
         leaderboard.setOnClickListener(new View.OnClickListener() {
             @Override
