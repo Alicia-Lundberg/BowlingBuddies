@@ -18,6 +18,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -144,14 +145,28 @@ public class BowlingActivity extends AppCompatActivity {
         ImageButton leaderboard = findViewById(R.id.leaderboard);
         leaderboard.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { //stänger av musiken när man går till hemskärm
-                if (mediaPlayer != null && mediaPlayer.isPlaying()) {
-                    mediaPlayer.stop();
-                    mediaPlayer.release();
-                    mediaPlayer = null;
-                }
-                startActivity(new Intent(BowlingActivity.this, LeaderboardActivity.class));
+            public void onClick(View v) {
+                PopupWindow popupWindow = new PopupWindow(BowlingActivity.this);
+
+                View popupView = getLayoutInflater().inflate(R.layout.activity_leaderboard, null);
+
+                popupWindow.setContentView(popupView);
+
+                popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+                popupWindow.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+
+                ImageButton returnButton = popupView.findViewById(R.id.returnButton);
+
+                returnButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                    }
+                });
+
+                popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
             }
+
         });
 
         ImageButton info = findViewById(R.id.infoIcon);
