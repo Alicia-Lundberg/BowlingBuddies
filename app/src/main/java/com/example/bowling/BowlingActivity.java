@@ -295,7 +295,7 @@ public class BowlingActivity extends AppCompatActivity {
                             scoreView.setText("Score " + score);
                             roundView.setText("Round " + roundCount);
                             throwView.setText("Throw " + (Throw+ 1)  );
-                            highScoreView.setText("Highscore " + highScore);
+                            highScoreView.setText("" + highScore);
 
 
                             Log.d("accelerometer",valuesText);
@@ -359,86 +359,6 @@ public class BowlingActivity extends AppCompatActivity {
         });
 
 
-
-
-
-
-        Button resetPins = findViewById(R.id.resetPins);
-        resetPins.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v){
-                resetPins();
-            }
-        });
-
-        strikePopup = (ImageView) findViewById(R.id.strikepopup);
-        Button testStrikeAnimation = findViewById(R.id.testStrikeAnimation);
-        testStrikeAnimation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v){
-                strikePopup.setScaleX(0.1f);
-                strikePopup.setScaleY(0.1f);
-                strikePopup.setVisibility(View.VISIBLE);
-
-                strikePopup.animate()
-                        .setDuration(700)
-                        .scaleX(1.0f)
-                        .scaleY(1.0f)
-                        .withEndAction(new Runnable() {
-                            @Override
-                            public void run() {
-                                // Keep the ImageView visible for two seconds before hiding it
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        strikePopup.setVisibility(View.GONE);
-                                    }
-                                }, 2000);
-                            }
-                        })
-                        .start();
-            }
-        });
-
-
-        sparePopup = (ImageView) findViewById(R.id.sparepopup);
-        Button testSpareAnimation = findViewById(R.id.testSpareAnimation);
-        testSpareAnimation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v){
-                sparePopup.setScaleX(0.1f);
-                sparePopup.setScaleY(0.1f);
-                sparePopup.setVisibility(View.VISIBLE);
-
-                sparePopup.animate()
-                        .setDuration(700)
-                        .scaleX(1.0f)
-                        .scaleY(1.0f)
-                        .withEndAction(new Runnable() {
-                            @Override
-                            public void run() {
-                                // Keep the ImageView visible for two seconds before hiding it
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        sparePopup.setVisibility(View.GONE);
-                                    }
-                                }, 2000);
-                            }
-                        })
-                        .start();
-            }
-        });
-
-
-        Button resetGame = findViewById(R.id.resetGame);
-        resetGame.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v){
-                resetGame();
-            }
-        });
-
         Button throwButton = findViewById(R.id.bowlingball);
         orangeBall = (ImageView) findViewById(R.id.orangeBall);
         throwButton.setOnClickListener(new View.OnClickListener() {
@@ -451,18 +371,6 @@ public class BowlingActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-        Button resetBall = findViewById(R.id.resetBall);
-        resetBall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v){
-                resetBall(orangeBall);
-            }
-        });
     }
 
     private void checkScore() {
