@@ -289,8 +289,8 @@ public class BowlingActivity extends AppCompatActivity {
                                 //display score och berätta för användaren att rundan är över
                             }
 
-                            scoreView.setText("Score " + score);
-                            highScoreView.setText("" + highScore);
+                            scoreView.setText("Score " + score * 100);
+                            highScoreView.setText("" + highScore * 100);
 
 
                             Log.d("accelerometer",valuesText);
@@ -402,26 +402,50 @@ public class BowlingActivity extends AppCompatActivity {
                     MediaPlayer mediaPlayer = MediaPlayer.create(BowlingActivity.this, R.raw.strike);
                     mediaPlayer.start();
 
-                    strikePopup.setScaleX(0.1f);
-                    strikePopup.setScaleY(0.1f);
-                    strikePopup.setVisibility(View.VISIBLE);
-                    strikePopup.animate()
-                            .setDuration(700)
-                            .scaleX(1.0f)
-                            .scaleY(1.0f)
-                            .withEndAction(new Runnable() {
-                                @Override
-                                public void run() {
-                                    // Keep the ImageView visible for two seconds before hiding it
-                                    new Handler().postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            strikePopup.setVisibility(View.GONE);
-                                        }
-                                    }, 2000);
-                                }
-                            })
-                            .start();
+                    if(kagla2.getRotation() != 0 && kagla4.getRotation() != 0 || kagla3.getRotation() != 0 && kagla6.getRotation() != 0){
+                        sparePopup.setScaleX(0.1f);
+                        sparePopup.setScaleY(0.1f);
+                        sparePopup.setVisibility(View.VISIBLE);
+                        sparePopup.animate()
+                                .setDuration(700)
+                                .scaleX(1.0f)
+                                .scaleY(1.0f)
+                                .withEndAction(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        // Keep the ImageView visible for two seconds before hiding it
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                sparePopup.setVisibility(View.GONE);
+                                            }
+                                        }, 2000);
+                                    }
+                                })
+                                .start();
+                    }else {
+                        strikePopup.setScaleX(0.1f);
+                        strikePopup.setScaleY(0.1f);
+                        strikePopup.setVisibility(View.VISIBLE);
+                        strikePopup.animate()
+                                .setDuration(700)
+                                .scaleX(1.0f)
+                                .scaleY(1.0f)
+                                .withEndAction(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        // Keep the ImageView visible for two seconds before hiding it
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                strikePopup.setVisibility(View.GONE);
+                                            }
+                                        }, 2000);
+                                    }
+                                })
+                                .start();
+                    }
+
                 }
             }, 1000);
             strikeCounter = 0;
@@ -436,22 +460,47 @@ public class BowlingActivity extends AppCompatActivity {
                 }
             }, 400);
 
-            throwBallLeft(orangeBall);
+
             //Handler handler = new Handler();
             pinsDown = 3;
 
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    kaglaFall(kagla1);
                     kaglaFall(kagla2);
                     kaglaFall(kagla4);
-                    kaglaFall(kagla6);
+                    kaglaFall(kagla5);
+
                     two.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
                     four.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
                     six.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
                     vibe.vibrate(500);
                     MediaPlayer mediaPlayer = MediaPlayer.create(BowlingActivity.this, R.raw.strike);
                     mediaPlayer.start();
+
+                    if(kagla3.getRotation() != 0 && kagla6.getRotation() != 0){
+                        sparePopup.setScaleX(0.1f);
+                        sparePopup.setScaleY(0.1f);
+                        sparePopup.setVisibility(View.VISIBLE);
+                        sparePopup.animate()
+                                .setDuration(700)
+                                .scaleX(1.0f)
+                                .scaleY(1.0f)
+                                .withEndAction(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        // Keep the ImageView visible for two seconds before hiding it
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                sparePopup.setVisibility(View.GONE);
+                                            }
+                                        }, 2000);
+                                    }
+                                })
+                                .start();
+                    }
                 }
             }, 1000);
             leftCounter = 0;
@@ -484,27 +533,28 @@ public class BowlingActivity extends AppCompatActivity {
                     mediaPlayer.start();
 
 
-                    //SPARE!!! (flytta på denna sen)
-                    strikePopup.setScaleX(0.1f);
-                    strikePopup.setScaleY(0.1f);
-                    strikePopup.setVisibility(View.VISIBLE);
-                    strikePopup.animate()
-                            .setDuration(700)
-                            .scaleX(1.0f)
-                            .scaleY(1.0f)
-                            .withEndAction(new Runnable() {
-                                @Override
-                                public void run() {
-                                    // Keep the ImageView visible for two seconds before hiding it
-                                    new Handler().postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            strikePopup.setVisibility(View.GONE);
-                                        }
-                                    }, 2000);
-                                }
-                            })
-                            .start();
+                    if(kagla2.getRotation() != 0 && kagla4.getRotation() != 0){
+                        sparePopup.setScaleX(0.1f);
+                        sparePopup.setScaleY(0.1f);
+                        sparePopup.setVisibility(View.VISIBLE);
+                        sparePopup.animate()
+                                .setDuration(700)
+                                .scaleX(1.0f)
+                                .scaleY(1.0f)
+                                .withEndAction(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        // Keep the ImageView visible for two seconds before hiding it
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                sparePopup.setVisibility(View.GONE);
+                                            }
+                                        }, 2000);
+                                    }
+                                })
+                                .start();
+                    }
                 }
             }, 1000);
             rightCounter = 0;
@@ -673,7 +723,6 @@ public class BowlingActivity extends AppCompatActivity {
     private void throwBallMissRight(final ImageView ball) {
         final float ballPlacement = -ball.getHeight() * 0.8f;
         final float scale = 0.5f;
-        vibe.vibrate(80);
         final float right = 180f;
 
         ball.animate()
