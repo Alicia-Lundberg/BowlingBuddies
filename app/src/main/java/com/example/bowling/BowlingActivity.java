@@ -914,35 +914,63 @@ public class BowlingActivity extends AppCompatActivity {
             throw1.setVisibility(View.GONE);
             throw2.setVisibility(View.VISIBLE);
         } else if (roundCount == 10 && Throw == 2) {
-            round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            throw1.setVisibility(View.VISIBLE);
+            throw2.setVisibility(View.GONE);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    throw1.setVisibility(View.VISIBLE);
+                    throw2.setVisibility(View.VISIBLE);
+                }
+            }, 1000);
         } else if (roundCount == 9 && Throw == 1) {
             round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
             throw1.setVisibility(View.GONE);
         } else if (roundCount == 9 && Throw == 2) {
-            round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            throw1.setVisibility(View.VISIBLE);
+            throw2.setVisibility(View.GONE);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    throw1.setVisibility(View.VISIBLE);
+                    throw2.setVisibility(View.VISIBLE);
+                }
+            }, 1000);
         } else if (roundCount == 8 && Throw == 1) {
             round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
             round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
             throw1.setVisibility(View.GONE);
         } else if (roundCount == 8 && Throw == 2) {
-            round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            throw1.setVisibility(View.VISIBLE);
+            throw2.setVisibility(View.GONE);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    throw1.setVisibility(View.VISIBLE);
+                    throw2.setVisibility(View.VISIBLE);
+                }
+            }, 1000);
         } else if (roundCount == 7 && Throw == 1) {
             round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
             round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
             round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
             throw1.setVisibility(View.GONE);
         } else if (roundCount == 7 && Throw == 2) {
-            round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round4.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            throw1.setVisibility(View.VISIBLE);
+            throw2.setVisibility(View.GONE);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round4.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    throw1.setVisibility(View.VISIBLE);
+                    throw2.setVisibility(View.VISIBLE);
+                }
+            }, 1000);
         } else if (roundCount == 6 && Throw == 1) {
             round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
             round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
@@ -950,12 +978,19 @@ public class BowlingActivity extends AppCompatActivity {
             round4.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
             throw1.setVisibility(View.GONE);
         } else if (roundCount == 6 && Throw == 2) {
-            round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round4.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round5.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            throw1.setVisibility(View.VISIBLE);
+            throw2.setVisibility(View.GONE);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round4.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round5.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    throw1.setVisibility(View.VISIBLE);
+                    throw2.setVisibility(View.VISIBLE);
+                }
+            }, 1000);
         } else if (roundCount == 5 && Throw == 1) {
             round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
             round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
@@ -964,13 +999,20 @@ public class BowlingActivity extends AppCompatActivity {
             round5.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
             throw1.setVisibility(View.GONE);
         } else if (roundCount == 5 && Throw == 2) {
-            round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round4.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round5.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round6.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            throw1.setVisibility(View.VISIBLE);
+            throw2.setVisibility(View.GONE);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round4.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round5.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round6.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    throw1.setVisibility(View.VISIBLE);
+                    throw2.setVisibility(View.VISIBLE);
+                }
+            }, 1000);
         } else if (roundCount == 4 && Throw == 1) {
             round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
             round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
@@ -980,14 +1022,21 @@ public class BowlingActivity extends AppCompatActivity {
             round6.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
             throw1.setVisibility(View.GONE);
         } else if (roundCount == 4 && Throw == 2) {
-            round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round4.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round5.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round6.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round7.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            throw1.setVisibility(View.VISIBLE);
+            throw2.setVisibility(View.GONE);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round4.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round5.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round6.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round7.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    throw1.setVisibility(View.VISIBLE);
+                    throw2.setVisibility(View.VISIBLE);
+                }
+            }, 1000);
         } else if (roundCount == 3 && Throw == 1) {
             round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
             round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
@@ -998,15 +1047,22 @@ public class BowlingActivity extends AppCompatActivity {
             round7.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
             throw1.setVisibility(View.GONE);
         } else if (roundCount == 3 && Throw == 2) {
-            round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round4.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round5.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round6.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round7.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round8.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            throw1.setVisibility(View.VISIBLE);
+            throw2.setVisibility(View.GONE);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round4.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round5.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round6.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round7.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round8.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    throw1.setVisibility(View.VISIBLE);
+                    throw2.setVisibility(View.VISIBLE);
+                }
+            }, 1000);
         } else if (roundCount == 2 && Throw == 1) {
             round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
             round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
@@ -1018,16 +1074,23 @@ public class BowlingActivity extends AppCompatActivity {
             round8.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
             throw1.setVisibility(View.GONE);
         } else if (roundCount == 2 && Throw == 2) {
-            round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round4.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round5.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round6.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round7.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round8.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            round9.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            throw1.setVisibility(View.VISIBLE);
+            throw2.setVisibility(View.GONE);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round3.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round4.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round5.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round6.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round7.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round8.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    round9.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                    throw1.setVisibility(View.VISIBLE);
+                    throw2.setVisibility(View.VISIBLE);
+                }
+            }, 1000);
         } else if (roundCount == 1 && Throw == 1) {
             round1.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
             round2.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
@@ -1040,6 +1103,8 @@ public class BowlingActivity extends AppCompatActivity {
             round9.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
             throw1.setVisibility(View.GONE);
         } else if (roundCount == 1 && Throw == 2) {
+            throw2.setVisibility(View.GONE);
+            round10.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
