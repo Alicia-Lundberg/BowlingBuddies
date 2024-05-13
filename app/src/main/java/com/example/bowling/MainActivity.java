@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         Button multiplayer = findViewById(R.id.buttonMulti);
         multiplayer.setOnClickListener(new View.OnClickListener() {
             @Override
