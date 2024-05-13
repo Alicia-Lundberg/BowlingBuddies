@@ -248,7 +248,7 @@ public class BowlingActivity extends AppCompatActivity {
                 button2.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
-                        //När man släpper kärmen
+                        //När man släpper kärme
                         if(event.getAction()==MotionEvent.ACTION_UP){
                             MediaPlayer mediaPlayer = MediaPlayer.create(BowlingActivity.this, R.raw.rolling);
                             mediaPlayer.setVolume(1.0f, 1.0f);
@@ -263,6 +263,13 @@ public class BowlingActivity extends AppCompatActivity {
                                 }
                             }, 1500);
                             checkScore();
+                            button2.setEnabled(false);
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    button2.setEnabled(true);
+                                }
+                            }, 3000);
                             strikeCounter=0;
                             leftCounter=0;
                             rightCounter=0;
@@ -314,7 +321,7 @@ public class BowlingActivity extends AppCompatActivity {
                                 //display score och berätta för användaren att rundan är över
                             }
 
-                            scoreView.setText("Score " + score * 100);
+                            scoreView.setText("Score: " + score * 100);
                             highScoreView.setText("" + highScore * 100);
 
 
@@ -611,7 +618,7 @@ public class BowlingActivity extends AppCompatActivity {
             public void run() {
                 resetBall(orangeBall);
             }
-        }, 1500);
+        }, 3000);
     }
     private void onScore(float tx, float ty, float tz) {
         if(ty < -1 && tz > 1){
