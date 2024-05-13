@@ -53,6 +53,7 @@ public class BowlingActivity extends AppCompatActivity {
     private ImageView orangeBall;
     private ImageView strikePopup;
     private ImageView sparePopup;
+    private ImageView pointsPopup;
 
     private int strikeCounter;
 
@@ -979,6 +980,7 @@ public class BowlingActivity extends AppCompatActivity {
             round10.clearColorFilter();
             throw1.setVisibility(View.VISIBLE);
             throw2.setVisibility(View.VISIBLE);
+            pointsPopup();
         } else {
             round1.clearColorFilter();
             round2.clearColorFilter();
@@ -993,6 +995,31 @@ public class BowlingActivity extends AppCompatActivity {
             throw1.setVisibility(View.VISIBLE);
             throw2.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void pointsPopup(){
+        pointsPopup = (ImageView) findViewById(R.id.pointspopup);
+        pointsPopup.setScaleX(0.1f);
+        pointsPopup.setScaleY(0.1f);
+        pointsPopup.setVisibility(View.VISIBLE);
+        pointsPopup.animate()
+                .setDuration(700)
+                .scaleX(1.0f)
+                .scaleY(1.0f)
+                .withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Keep the ImageView visible for two seconds before hiding it
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                pointsPopup.setVisibility(View.GONE);
+                            }
+                        }, 2000);
+                    }
+                })
+                .start();
+
     }
 
 }
