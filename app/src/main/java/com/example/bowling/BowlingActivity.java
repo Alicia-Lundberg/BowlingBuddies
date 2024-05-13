@@ -625,10 +625,10 @@ public class BowlingActivity extends AppCompatActivity {
             if (Math.abs(tx) < 0.5) {
                 strikeCounter ++; //strike
             }
-            if ( tx > -1 && tx < 0) {
+            if ( tx > -5 && tx < 0) {
                 leftCounter ++; //lite vänster?
             }
-            if (tx < 1 && tx > 0) {
+            if (tx < 5 && tx > 0) {
                 rightCounter ++; // lite höger?
             }
         }
