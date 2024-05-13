@@ -261,16 +261,19 @@
         app:layout_constraintVertical_bias="0.722"
         app:srcCompat="@drawable/sparesimple" />
 
+
     <ImageView
         android:id="@+id/pointspopup"
         android:layout_width="600dp"
         android:layout_height="800dp"
         android:background="@android:color/transparent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
         android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.507"
         app:srcCompat="@drawable/totalscore" />
 
 
@@ -421,10 +424,10 @@
         android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.948"
+        app:layout_constraintHorizontal_bias="0.942"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.08"
+        app:layout_constraintVertical_bias="0.079"
         app:srcCompat="@drawable/crown" />
 
     <Button
@@ -468,22 +471,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.903" />
 
+
     <TextView
         android:id="@+id/highScorePop"
         android:layout_width="89dp"
         android:layout_height="31dp"
-        android:text=""
+        android:text="0"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/four"
-        app:layout_constraintHorizontal_bias="0.041"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.593"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.903" />
-
+        app:layout_constraintVertical_bias="0.595" />
 
     <TextView
         android:id="@+id/highScore"
