@@ -51,6 +51,8 @@ public class BowlingActivity extends AppCompatActivity {
     private ImageView kagla5;
     private ImageView kagla6;
     private ImageView orangeBall;
+
+    private ImageView crown;
     private ImageView strikePopup;
     private ImageView sparePopup;
     private ImageView pointsPopup;
@@ -145,6 +147,9 @@ public class BowlingActivity extends AppCompatActivity {
         round8 = (ImageView) findViewById(R.id.round8);
         round9 = (ImageView) findViewById(R.id.round9);
         round10 = (ImageView) findViewById(R.id.round10);
+
+        crown = (ImageView) findViewById(R.id.crown);
+
 
         ImageButton returnButton = findViewById(R.id.returnButton);
         returnButton.setOnClickListener(new View.OnClickListener() {
@@ -277,12 +282,30 @@ public class BowlingActivity extends AppCompatActivity {
                                 }, 2000);
                             }
 
+
                             if(roundCount < 1){
                                 if (score > highScore) {
                                     highScore = score;
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putInt("highScore", highScore);
                                     editor.apply(); // kanske editor.commit()
+                                    highScoreView.animate()
+                                            .scaleX(1.5f)
+                                            .scaleY(1.5f)
+                                            .setDuration(800)
+                                            .withEndAction(() -> highScoreView.animate().scaleX(1f).scaleY(1f).setDuration(500));
+                                    crown.animate()
+                                            .scaleX(1.5f)
+                                            .scaleY(1.5f)
+                                            .setDuration(500)
+                                            .withEndAction(() -> {
+                                                crown.animate()
+                                                        .scaleX(1f)
+                                                        .scaleY(1f)
+                                                        .setDuration(800)
+                                                        .start();
+                                            });
+
                                 }
                                 Throw = 0;
                                 score = 0;
