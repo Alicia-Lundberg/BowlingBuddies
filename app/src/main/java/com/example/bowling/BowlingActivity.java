@@ -1033,19 +1033,24 @@ public class BowlingActivity extends AppCompatActivity {
             round9.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
             throw1.setVisibility(View.GONE);
         } else if (roundCount == 1 && Throw == 2) {
-            round1.clearColorFilter();
-            round2.clearColorFilter();
-            round3.clearColorFilter();
-            round4.clearColorFilter();
-            round5.clearColorFilter();
-            round6.clearColorFilter();
-            round7.clearColorFilter();
-            round8.clearColorFilter();
-            round9.clearColorFilter();
-            round10.clearColorFilter();
-            throw1.setVisibility(View.VISIBLE);
-            throw2.setVisibility(View.VISIBLE);
-            pointsPopup();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    round1.clearColorFilter();
+                    round2.clearColorFilter();
+                    round3.clearColorFilter();
+                    round4.clearColorFilter();
+                    round5.clearColorFilter();
+                    round6.clearColorFilter();
+                    round7.clearColorFilter();
+                    round8.clearColorFilter();
+                    round9.clearColorFilter();
+                    round10.clearColorFilter();
+                    throw1.setVisibility(View.VISIBLE);
+                    throw2.setVisibility(View.VISIBLE);
+                    pointsPopup();
+                }
+            }, 2200);
         } else {
             round1.clearColorFilter();
             round2.clearColorFilter();
@@ -1063,7 +1068,7 @@ public class BowlingActivity extends AppCompatActivity {
     }
 
     private void pointsPopup(){
-        highScoreText.setText("Scorepooop:" + highScore * 100);
+        highScoreText.setText(""+score * 100);
         highScoreText.setScaleX(0.1f);
         highScoreText.setScaleY(0.1f);
         highScoreText.setVisibility(View.VISIBLE);
@@ -1084,7 +1089,7 @@ public class BowlingActivity extends AppCompatActivity {
                             public void run() {
                                 pointsPopup.setVisibility(View.GONE);
                             }
-                        }, 2000);
+                        }, 3000);
                     }
                 })
                 .start();
@@ -1101,7 +1106,7 @@ public class BowlingActivity extends AppCompatActivity {
                             public void run() {
                                 highScoreText.setVisibility(View.GONE);
                             }
-                        }, 2000);
+                        }, 3000);
                     }
                 })
                 .start();
