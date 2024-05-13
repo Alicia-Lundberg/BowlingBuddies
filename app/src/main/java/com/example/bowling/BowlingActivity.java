@@ -105,7 +105,7 @@ public class BowlingActivity extends AppCompatActivity {
     private ImageView round9;
     private ImageView round10;
 
-
+    private TextView highScoreText;
 
     Vibrator vibe;
     private Vibrator vibrator;
@@ -218,6 +218,8 @@ public class BowlingActivity extends AppCompatActivity {
         scoreView = (TextView) this.findViewById(R.id.score);
 
         highScoreView = (TextView) this.findViewById(R.id.highScore);
+
+        highScoreText = (TextView) this.findViewById(R.id.highScorePop);
 
         accelerometer.setListener(new Accelerometer.Listener() {
             @SuppressLint("ClickableViewAccessibility")
@@ -1039,6 +1041,10 @@ public class BowlingActivity extends AppCompatActivity {
     }
 
     private void pointsPopup(){
+        highScoreText.setText("Scorepooop:" + highScore * 100);
+        highScoreText.setScaleX(0.1f);
+        highScoreText.setScaleY(0.1f);
+        highScoreText.setVisibility(View.VISIBLE);
         pointsPopup = (ImageView) findViewById(R.id.pointspopup);
         pointsPopup.setScaleX(0.1f);
         pointsPopup.setScaleY(0.1f);
@@ -1060,7 +1066,25 @@ public class BowlingActivity extends AppCompatActivity {
                     }
                 })
                 .start();
+        highScoreText.animate()
+                .setDuration(700)
+                .scaleX(1.0f)
+                .scaleY(1.0f)
+                .withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Keep the ImageView visible for two seconds before hiding it
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                highScoreText.setVisibility(View.GONE);
+                            }
+                        }, 2000);
+                    }
+                })
+                .start();
 
     }
+
 
 }
