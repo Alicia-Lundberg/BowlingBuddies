@@ -280,6 +280,7 @@ public class BowlingActivity extends AppCompatActivity {
                                 }, 2000);
                             }
 
+
                             if(roundCount < 1){
                                 if (score > highScore) {
                                     highScore = score;
