@@ -88,8 +88,6 @@ public class BowlingActivity extends AppCompatActivity {
 
     private int roundCount = 10;
     private TextView scoreView;
-    private TextView roundView;
-    private TextView throwView;
 
     private TextView highScoreView;
 
@@ -217,8 +215,7 @@ public class BowlingActivity extends AppCompatActivity {
         accelerometer = new Accelerometer(this);
 
         scoreView = (TextView) this.findViewById(R.id.score);
-        roundView = (TextView) this.findViewById(R.id.round11); // Den blev round 11 venne varför
-        throwView = (TextView) this.findViewById(R.id.Throw);
+
         highScoreView = (TextView) this.findViewById(R.id.highScore);
 
         accelerometer.setListener(new Accelerometer.Listener() {
@@ -293,8 +290,6 @@ public class BowlingActivity extends AppCompatActivity {
                             }
 
                             scoreView.setText("Score " + score);
-                            roundView.setText("Round " + roundCount);
-                            throwView.setText("Throw " + (Throw+ 1)  );
                             highScoreView.setText("" + highScore);
 
 
