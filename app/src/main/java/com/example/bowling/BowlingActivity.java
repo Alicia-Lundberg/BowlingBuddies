@@ -585,16 +585,8 @@ public class BowlingActivity extends AppCompatActivity {
                     .start();
 
             float saturationFactor = 0.5f; // Adjust as needed (0.0f for fully desaturated, 1.0f for original saturation)
-
-
-            one.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            two.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            three.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            four.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            five.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
-            six.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
         }
-    } //kolla klammrar
+    }
 
     private void resetPins() {
         kagla6.setRotation(0f);
